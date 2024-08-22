@@ -1,0 +1,59 @@
+# Dependencias
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+.pnpm-debug.log
+
+# Archivos de entorno
+.env
+.env.local
+.env.*.local
+
+# Directorios de construcción/generados
+dist/
+build/
+out/
+
+# Archivos de registro
+logs
+*.log
+
+# Directorios y archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Directorios y archivos del editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de cobertura
+coverage/
+
+# Archivos temporales
+tmp/
+temp/
+
+# Archivos de caché
+.cache/
+.npm
+
+# Otros archivos y directorios específicos de Node.js
+.nyc_output
+.grunt
+bower_components/
+
+# Archivos de bloqueo de dependencias (descomenta según tus necesidades)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Archivos de TypeScript (si estás usando TypeScript)
+*.tsbuildinfo
+
+# Directorios de prueba opcionales (descomenta si no quieres incluirlos)
+# test/
+# __tests__/
+# spec/
