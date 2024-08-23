@@ -5,6 +5,8 @@ const mysql = require('mysql2/promise');
 const passport = require('passport');
 const session = require('express-session');
 const path = require('path');
+const Swal = require('sweetalert2');
+
 
 const app = express();
 
@@ -75,11 +77,17 @@ app.get('/reset-password', (req, res) => {
   res.render('ResetPassword');
 });
 
+app.get('/user/payments', (req, res) => {
+  res.render('User/payments');
+});
+
 // Puerto
-const PORT = process.env.PORT || 3300;
+const PORT = process.env.PORT || 3308;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
 
 // Passport configuration
 require('./Passport/passport-setup');

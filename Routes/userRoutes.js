@@ -25,4 +25,14 @@ router.get('/salones', (req, res) => {
   res.render('User/salones');
 });
 
+
+router.get('/lounge', (req, res) => {
+  res.render('User/lounge');
+});
+
+router.get('/payments', (req, res) => {
+  res.render('User/payments'); 
+});
+
+
 module.exports = router;
