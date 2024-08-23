@@ -35,15 +35,17 @@
             </ul>
         </nav>
     </header>
-    <body>
-        <div class="container">
-            <h1>Tus Reservas</h1>
-    
-            <div id="reservas-container">
-                <!-- Aquí se insertará el contenido dinámico -->
-            </div>
+    <div class="payment-container">
+        <h2>Confirmar y Pagar</h2>
+        <div id="payment-info">
+            <!-- Aquí se mostrará la información de los salones y el total -->
         </div>
-        <script src="/Public/Js/reservation.js"></script>
-    </body>
-    </html>
+        <div class="total">
+            <p>Total a pagar: $<span id="total-amount">0</span></p>
+        </div>
+        <button id="confirm-payment" type="button">Confirmar y Pagar</button>
+    </div>
 
+    <script src="/Public/Js/payments.js"></script>
+</body>
+</html>

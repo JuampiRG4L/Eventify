@@ -1,40 +1,34 @@
-//Modelo de administrador
+// Modelo para Cambiar contraseña
 
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Admin = sequelize.define('Admin', {
+const RestablecimientoContraseña = sequelize.define('RestablecimientoContraseña', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    nombre: {
+    correo: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    correo: {
+    token: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    contraseña: {
-        type: DataTypes.STRING,
+    expiracion: {
+        type: DataTypes.DATE,
         allowNull: false
     },
     creado_en: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
-    },
-    actualizado_en: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
     }
 }, {
-    tableName: 'Administradores',
-    timestamps: true,
-    createdAt: 'creado_en',
-    updatedAt: 'actualizado_en'
+    tableName: 'RestablecimientoContraseña',
+    timestamps: false // Solo tiene fecha de creación
 });
 
-module.exports = Admin;
+module.exports = RestablecimientoContraseña;

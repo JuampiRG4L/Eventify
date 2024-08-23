@@ -1,25 +1,34 @@
-//Modelo de administrador
+// Modelo para pagos
 
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
+const Reservacion = require('./reservacion'); // Modelo de Reservacion
 
-const Admin = sequelize.define('Admin', {
+const Pago = sequelize.define('Pago', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    nombre: {
+    id_reservacion: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Reservacion,
+            key: 'id'
+        },
+        allowNull: false
+    },
+    monto: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
+    },
+    metodo_pago: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    correo: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    contraseña: {
-        type: DataTypes.STRING,
+    estado_pago: {
+        type: DataTypes.ENUM('pendiente', 'completado', 'fallido'),
+        defaultValue: 'pendiente',
         allowNull: false
     },
     creado_en: {
@@ -31,10 +40,10 @@ const Admin = sequelize.define('Admin', {
         defaultValue: DataTypes.NOW
     }
 }, {
-    tableName: 'Administradores',
+    tableName: 'Pagos',
     timestamps: true,
     createdAt: 'creado_en',
     updatedAt: 'actualizado_en'
 });
 
-module.exports = Admin;
+module.exports = Pago;
