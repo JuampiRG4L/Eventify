@@ -2,15 +2,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const registerButton = document.getElementById("register");
     const loginButton = document.getElementById("login");
     const container = document.getElementById("container");
-  
+
     registerButton.addEventListener("click", () => {
         container.classList.add("right-panel-active");
     });
-  
+
     loginButton.addEventListener("click", () => {
         container.classList.remove("right-panel-active");
     });
-  
+
     // Selección de elementos del formulario de registro
     const regForm = document.querySelector(".register-container form");
     const usernameReg = document.getElementById('username');
@@ -19,14 +19,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const usernameErrorReg = document.getElementById('username-error');
     const emailErrorReg = document.getElementById('email-error');
     const passwordErrorReg = document.getElementById('password-error');
-  
+
     // Selección de elementos del formulario de inicio de sesión
     const lgForm = document.querySelector(".login-container form");
     const emailLg = document.querySelector('.email-2');
     const passwordLg = document.querySelector('.password-2');
     const emailErrorLg = document.querySelector(".email-error-2");
     const passwordErrorLg = document.querySelector(".password-error-2");
-  
+
+    // Registro de usuario
     regForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         if (!checkRequired([usernameReg, emailReg, passwordReg])) {
@@ -35,65 +36,83 @@ document.addEventListener("DOMContentLoaded", function() {
             const contraseña = passwordReg.value;
             const proveedor = 'local';
             const id_proveedor = null;
-    
-            const response = await fetch('/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nombre, correo, contraseña, proveedor, id_proveedor })
-            });
-    
-            const data = await response.json();
-            if (data.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Registro Exitoso',
-                    text: data.message,
+
+            try {
+                const response = await fetch('/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre, correo, contraseña, proveedor, id_proveedor })
                 });
-            } else {
+
+                const data = await response.json();
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registro Exitoso',
+                        text: data.message,
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message,
+                    });
+                }
+            } catch (error) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: data.message,
+                    text: 'Ocurrió un error durante el registro.',
                 });
             }
         }
     });
-    
+
+    // Inicio de sesión
     lgForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         if (!checkRequired([emailLg, passwordLg])) {
             const correo = emailLg.value;
             const contraseña = passwordLg.value;
-    
-            const response = await fetch('/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ correo, contraseña })
-            });
-    
-            const data = await response.json();
-            if (data.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Inicio de Sesión Exitoso',
-                    text: data.message,
-                }).then(() => {
-                    window.location.href = '/dashboard'; // Redirige a la página deseada
+
+            try {
+                const response = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ correo, contraseña })
                 });
-            } else {
+
+                const data = await response.json();
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Inicio de Sesión Exitoso',
+                        text: data.message,
+                    }).then(() => {
+                        window.location.href = '/dashboard'; // Redirige a la página deseada
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message,
+                    });
+                }
+            } catch (error) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: data.message,
+                    text: 'Ocurrió un error durante el inicio de sesión.',
                 });
             }
         }
     });
-    
+
+    // Validación de campos requeridos
     function checkRequired(inputs) {
         let isValid = true;
         inputs.forEach(input => {
@@ -106,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         return !isValid;
     }
-  
+
     function showError(input, message) {
         const formControl = input.parentElement;
         if (formControl) {
@@ -117,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }
-  
+
     function showSuccess(input) {
         const formControl = input.parentElement;
         if (formControl) {
@@ -128,16 +147,17 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }
-  
+
     function getFieldName(input) {
         return input.placeholder;
     }
-  
+
     function checkEmail(input) {
         const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
         return emailRegex.test(input.value.trim());
     }
-  
+
+    // Validación en tiempo real
     usernameReg.addEventListener("input", function() {
         if (usernameReg.value.trim().length < 4) {
             showError(usernameReg, "El nombre de usuario debe tener al menos 4 caracteres.");
@@ -147,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
             showSuccess(usernameReg);
         }
     });
-  
+
     emailReg.addEventListener("input", function() {
         if (!checkEmail(emailReg)) {
             showError(emailReg, "El email no es válido.");
@@ -155,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
             showSuccess(emailReg);
         }
     });
-  
+
     passwordReg.addEventListener("input", function() {
         if (passwordReg.value.trim().length < 8) {
             showError(passwordReg, "La contraseña debe tener al menos 8 caracteres.");
@@ -165,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function() {
             showSuccess(passwordReg);
         }
     });
-  
+
     emailLg.addEventListener("input", function() {
         if (!checkEmail(emailLg)) {
             showError(emailLg, "El email no es válido.");
@@ -173,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
             showSuccess(emailLg);
         }
     });
-  
+
     passwordLg.addEventListener("input", function() {
         if (passwordLg.value.trim().length < 8) {
             showError(passwordLg, "La contraseña debe tener al menos 8 caracteres.");
@@ -183,5 +203,4 @@ document.addEventListener("DOMContentLoaded", function() {
             showSuccess(passwordLg);
         }
     });
-  });
-  
+});

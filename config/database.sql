@@ -6,12 +6,14 @@ CREATE TABLE Usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     correo VARCHAR(255) NOT NULL UNIQUE,
-    contraseña VARCHAR(255),
+    contraseña VARCHAR(255) NOT NULL,
     proveedor ENUM('local', 'facebook') NOT NULL,
     id_proveedor VARCHAR(255),
+    rol ENUM('usuario', 'admin') DEFAULT 'usuario', 
     creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
 
 CREATE TABLE Administradores (
     id INT AUTO_INCREMENT PRIMARY KEY,
