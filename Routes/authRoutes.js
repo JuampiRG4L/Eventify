@@ -8,6 +8,8 @@ const { check, validationResult } = require('express-validator');
 const Usuario = require('../Models/User');
 const Admin = require('../Models/Admin');
 const Swal = require('sweetalert2');
+const authController = require('../Controllers/authController');
+
 
 // Registro de usuario
 router.post('/register', async (req, res) => {
@@ -156,6 +158,9 @@ router.post('/request-reset-password', async (req, res) => {
     }
 });
 
+// Ruta para solicitar restablecimiento de contraseña
+router.post('/forgot-password', authController.solicitarRestablecimiento);
+
 router.post('/reset-password', async (req, res) => {
     const { token, contraseña } = req.body;
     try {
@@ -177,6 +182,9 @@ router.post('/reset-password', async (req, res) => {
         res.status(500).json({ message: 'Ocurrió un error al restablecer la contraseña.' });
     }
 });
+
+// Ruta para manejar el restablecimiento de contraseña
+router.post('/reset/:token', authController.restablecerContraseña);
 
 
 // ruta de la Cuenta con google

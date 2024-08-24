@@ -18,7 +18,7 @@
 <body>
   <div class="container" id="container">
     <div class="form-container register-container">
-      <form>
+      <form id="registerForm">
         <h1>Regístrate aquí</h1>
         <div class="form-control">
           <input type="text" id="username" placeholder="Nombre" />
@@ -45,23 +45,23 @@
     </div>
 
     <div class="form-container login-container">
-      <form class="form-lg">
+      <form id="loginForm">
         <h1>Inicia sesión aquí</h1>
         <div class="form-control2">
-          <input type="email" class="email-2" placeholder="Correo electrónico" />
-          <small class="email-error-2"></small>
+          <input type="email" id="login-email" placeholder="Correo electrónico" />
+          <small id="login-email-error"></small>
           <span></span>
         </div>
         <div class="form-control2">
-          <input type="password" class="password-2" placeholder="Contraseña" />
-          <small class="password-error-2"></small>
+          <input type="password" id="login-password" placeholder="Contraseña" />
+          <small id="login-password-error"></small>
           <span></span>
         </div>
 
         <div class="content">
           <div class="checkbox">
             <input type="checkbox" name="checkbox" id="checkbox" />
-            <label for="">Recuérdame</label>
+            <label for="checkbox">Recuérdame</label>
           </div>
           <div class="pass-link">
             <a href="/reset-password">¿Olvidaste la contraseña?</a>
