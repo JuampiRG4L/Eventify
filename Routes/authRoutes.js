@@ -8,7 +8,12 @@ const { check, validationResult } = require('express-validator');
 const Usuario = require('../Models/User');
 const Admin = require('../Models/Admin');
 const Swal = require('sweetalert2');
+const Payment  = require('../Models/Payment');
+const RestablecimientoContraseña  = require('../Models/RestablecimientoContraseña');
+const Room  = require('../Models/Room');
+const Reservation = require('../Models/Reservation')
 const authController = require('../Controllers/authController');
+
 
 
 // Registro de usuario
@@ -161,7 +166,7 @@ router.post('/request-reset-password', async (req, res) => {
 // Ruta para solicitar restablecimiento de contraseña
 router.post('/forgot-password', authController.solicitarRestablecimiento);
 
-router.post('/reset-password', async (req, res) => {
+router.post('/RestablecimientoContraseña', async (req, res) => {
     const { token, contraseña } = req.body;
     try {
         const [reset] = await db.query('SELECT * FROM RestablecimientoContraseña WHERE token = ?', [token]);
@@ -184,8 +189,8 @@ router.post('/reset-password', async (req, res) => {
 });
 
 // Ruta para manejar el restablecimiento de contraseña
-router.post('/reset/:token', authController.restablecerContraseña);
-
+router.post('/solicitar', authController.solicitarRestablecimiento);
+router.put('/restablecer/:token', authController.restablecerContraseña);
 
 // ruta de la Cuenta con google
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));

@@ -1,10 +1,8 @@
 // Modelo para pagos
+const Reservacion = require('./Reservation'); // Modelo de Reservacion
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const Reservacion = require('./reservacion'); // Modelo de Reservacion
-
-const Pago = sequelize.define('Pago', {
+module.exports = (sequelize, DataTypes) => {
+    const Pago = sequelize.define('Pago', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -46,4 +44,7 @@ const Pago = sequelize.define('Pago', {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = Pago;
+module.exports ={
+    Pago
+};
+}

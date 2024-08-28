@@ -3,11 +3,15 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
-const RestablecimientoContraseña = require('../models/RestablecimientoContraseña');
+const RestablecimientoContraseña = require('../Models/RestablecimientoContraseña');
 const User = require('../Models/User');
+const Admin  = require('../Models/Admin');
+const Payment  = require('../Models/Payment');
+const Room  = require('../Models/Room');
+const Reservation = require('../Models/Reservation')
 
 // Controlador para solicitar restablecimiento de contraseña
-exports.solicitarRestablecimiento = async (req, res) => {
+async function solicitarRestablecimiento (req, res) {
     try {
         const { correo } = req.body;
         const usuario = await User.findOne({ where: { correo } });
@@ -72,7 +76,7 @@ exports.solicitarRestablecimiento = async (req, res) => {
 };
 
 // Controlador para restablecer la contraseña
-exports.restablecerContraseña = async (req, res) => {
+async function restablecerContraseña (req, res) {
     try {
         const { token } = req.params;
         const { contraseña } = req.body;
@@ -120,3 +124,10 @@ exports.restablecerContraseña = async (req, res) => {
         });
     }
 };
+
+
+module.exports = {
+    solicitarRestablecimiento,
+    restablecerContraseña
+};
+

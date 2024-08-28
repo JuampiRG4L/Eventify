@@ -1,9 +1,7 @@
 // Modelo de usuario
 
-const { DataTypes } = require('Sequelize');
-const sequelize = require('../config/db');
-
-const Usuario = sequelize.define('Usuario', {
+module.exports = (sequelize, DataTypes) =>{
+    const Usuario = sequelize.define('usuario', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -46,4 +44,7 @@ const Usuario = sequelize.define('Usuario', {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = Usuario;
+module.exports = {
+    Usuario
+};
+}
