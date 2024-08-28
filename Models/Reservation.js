@@ -1,11 +1,9 @@
 //Modelo de reservación
-
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
 const Usuario = require('./User'); // Modelo de Usuario
-const Salon = require('./salon'); // Modelo de Salon
+const Salon = require('./Room'); // Modelo de Salon
 
-const Reservacion = sequelize.define('Reservacion', {
+module.exports = (sequelize, DataTypes) => {
+    const Reservacion = sequelize.define('Reservacion', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -67,4 +65,7 @@ const Reservacion = sequelize.define('Reservacion', {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = Reservacion;
+module.exports = {
+    Reservacion
+};
+}

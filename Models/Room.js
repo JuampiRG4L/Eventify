@@ -1,10 +1,9 @@
 // Modelo de salón
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const Admin = require('./Admin'); // Modelo de Admin
+const Admin = require('./Admin'); // MOdelo del administrador
 
-const Salon = sequelize.define('Salon', {
+module.exports = (sequelize, DataTypes) => {
+    const Salon = sequelize.define('Salon', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -61,4 +60,7 @@ const Salon = sequelize.define('Salon', {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = Salon;
+module.exports = {
+    Salon
+};
+}

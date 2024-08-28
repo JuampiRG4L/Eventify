@@ -1,9 +1,7 @@
 // Modelo para Cambiar contraseña
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-
-const RestablecimientoContraseña = sequelize.define('RestablecimientoContraseña', {
+module.exports = (sequelize, DataTypes) => {
+    const restablecimientoContraseña = sequelize.define('restablecimientoContraseña', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -28,7 +26,10 @@ const RestablecimientoContraseña = sequelize.define('RestablecimientoContraseñ
     }
 }, {
     tableName: 'RestablecimientoContraseña',
-    timestamps: false // Solo tiene fecha de creación
+    timestamps: false
 });
 
-module.exports = RestablecimientoContraseña;
+module.exports = {
+    restablecimientocontraseña
+};
+}

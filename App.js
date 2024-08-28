@@ -61,6 +61,8 @@ app.use('/user', userRoutes);
 const adminRoutes = require('./Routes/adminRoutes');
 app.use('/admin', adminRoutes);
 
+
+
 app.get('/', (req, res) => {
   res.render('User/index'); // O se puede renderizar una vista
 });
@@ -74,7 +76,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/reset-password', (req, res) => {
-  res.render('ResetPassword');
+  res.render('RestablecimientoContraseña');
 });
 
 app.get('/user/payments', (req, res) => {

@@ -1,16 +1,15 @@
-const Sequelize = require('./database.sql');
+const Sequelize  = require('sequelize'); // Requerir Sequelize de la librería correcta
 const dotenv = require('dotenv');
 const User = require('../Models/User');
 const Admin = require('../Models/Admin');
 const Room = require('../Models/Room');
 const Reservation = require('../Models/Reservation');
-const PasswordReset = require('../Models/PasswordReset'); 
+const PasswordReset = require('../Models/RestablecimientoContraseña'); 
 
-
-// config/db.js
-
+// Cargar las variables de entorno desde el archivo .env
 dotenv.config();
 
+// Crear una instancia de Sequelize usando las credenciales del archivo .env
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -30,6 +29,10 @@ sequelize.sync({ alter: true })
         console.error('Error al sincronizar los modelos:', error);
     });
 
-module.exports = Sequelize;
+// Exportar la instancia de Sequelize para usarla en otros archivos
 
+
+module.exports = {
+  Sequelize
+};
 
