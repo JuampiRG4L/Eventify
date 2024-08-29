@@ -1,13 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var splide = new Splide('.splide', {
-      type: 'loop',
-      perPage: 3,
-      perMove: 1,
-      interval: 4000,
-      autoplay: true,
+    var mainCarousel = new Splide('#main-carousel', {
+      heightRatio: 0.5,
       pagination: false,
       arrows: false,
-  });
-
-  splide.mount();
+      cover: true
+    }).mount();
+  
+    var thumbnailCarousel = new Splide('#thumbnail-carousel', {
+      fixedWidth: 150,
+      fixedHeight: 160,
+      perPage: 4,
+      perMove: 1,
+      autoplay: true,
+      rewind: true,
+      rewindSpeed: 1000,
+      isNavigation: true,
+      arrows: false,
+      gap: 10,
+      type: 'loop',
+      pagination: false,
+      cover: true,
+      breakpoints: {
+        600: {
+          fixedWidth: 66,
+          fixedHeight: 40,
+        },
+      },
+    }).mount();
+  
+    mainCarousel.sync(thumbnailCarousel);
 });
