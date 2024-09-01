@@ -61,14 +61,16 @@ app.use('/user', userRoutes);
 const adminRoutes = require('./Routes/adminRoutes');
 app.use('/admin', adminRoutes);
 
-
-
 app.get('/', (req, res) => {
   res.render('User/index'); // O se puede renderizar una vista
 });
 
 app.get('/index', (req, res) => {
   res.render('User/index');
+});
+
+app.get('/sub_halls', (req, res) => {
+  res.render('User/sub_halls');
 });
 
 app.get('/login', (req, res) => {
@@ -88,8 +90,6 @@ const PORT = process.env.PORT || 3308;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-
 
 // Passport configuration
 require('./Passport/passport-setup');

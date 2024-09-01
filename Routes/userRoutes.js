@@ -18,6 +18,10 @@ router.get('/dashboard', ensureAdmin, (req, res) => {
   res.render('User/index');
 });
 
+router.get('/halls', (req, res) => {
+  res.render('User/halls');
+});
+
 router.get('/profile', ensureAdmin, (req, res) => {
   res.render('User/profile');
 });
