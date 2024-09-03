@@ -8,23 +8,18 @@ const bcrypt = require('bcryptjs');
 const { Usuario } = require('../Models/User'); // Asegúrate de que la ruta sea correcta
 
 async function registrarUsuario(req, res) {
-    const { nombre, correo, contraseña, rol = 'usuario' } = req.body;
     try {
-        const salt = await bcrypt.genSalt(10);
-        const hash = await bcrypt.hash(contraseña, salt);
-
         // Crear un nuevo usuario usando el modelo Sequelize
-        const nuevoUsuario = await Usuario.create({
+        const usuario = await Usuario.create({
             nombre,
             correo,
-            contraseña: hash,
-            proveedor: 'local',
-            rol
+            contraseña: proveedor === 'local' ? hashedPassword : null,
+            rol,
+            id_proveedor: proveedor !== 'local' ? generarIdProveedor() : null
         });
-
-        res.json({ message: 'Usuario registrado con éxito', usuario: nuevoUsuario });
+        res.json({ message: 'Usuario registrado con éxito', usuario });
     } catch (error) {
-        // Manejo de errores
+        console.error(error);
         res.status(500).json({ error: 'Error al registrar el usuario' });
     }
 }

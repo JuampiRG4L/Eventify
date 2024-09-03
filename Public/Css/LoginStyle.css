@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 * {
-  /* margin: 0;
-    padding: 0; */
   box-sizing: border-box;
 }
 
@@ -202,6 +200,7 @@ input {
 .form-control2 input:focus ~ span {
   width: 100%;
 }
+
 .form-control small {
   color: red;
   position: absolute;
@@ -257,7 +256,6 @@ input {
 }
 
 .register-container {
-  /* position: relative; */
   left: 0;
   width: 50%;
   opacity: 0;
@@ -382,4 +380,38 @@ input {
 
 .social-container a:hover {
   border: 1px solid #4bb6b7;
+}
+
+/* Añadir estilo para el campo select */
+.form-control select {
+  background-color: #fff;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #adadad;
+  padding: 12px 0px;
+  margin: 8px 0;
+  width: 100%;
+  font-size: 15px;
+  color: #333;
+  font-family: "Poppins", sans-serif;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.form-control select:focus {
+  border-bottom: 2px solid #2691d9;
+}
+
+.form-control span {
+  position: absolute;
+  border-bottom: 3px solid #2691d9;
+  left: 0;
+  bottom: 8px;
+  width: 0%;
+  transition: all 0.3s ease;
+}
+
+.form-control select:focus ~ span {
+  width: 100%;
 }
