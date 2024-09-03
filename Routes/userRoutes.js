@@ -1,12 +1,7 @@
 // userRoutes.js
 const Usuario  = require('../Models/User');
-const Admin  = require('../Models/Admin');
-const Payment  = require('../Models/Payment');
-const RestablecimientoContraseña  = require('../Models/RestablecimientoContraseña');
-const Room  = require('../Models/Room');
 const express = require('express');
 const router = express.Router();
-const authController = require('../Controllers/authController')
 const { isAuthenticated, ensureAdmin } = require('../Middleware/auth');
 
 // Rutas

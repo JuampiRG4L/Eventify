@@ -13,22 +13,29 @@
 <body>
   <div class="container" id="container">
     <div class="form-container register-container">
-      <form id="registerForm">
+      <form id="registerForm" action="/register" method="post">
         <h1>Regístrate aquí</h1>
         <div class="form-control">
-          <input type="text" id="username" placeholder="Nombre"/>
+          <input type="text" id="username" name="nombre" placeholder="Nombre" required/>
           <small id="username-error"></small>
           <span></span>
         </div>
         <div class="form-control">
-          <input type="email" id="email" placeholder="Correo electrónico"/>
+          <input type="email" id="email" name="correo" placeholder="Correo electrónico" required/>
           <small id="email-error"></small>
           <span></span>
         </div>
         <div class="form-control">
-          <input type="password" id="password" placeholder="Contraseña"/>
+          <input type="password" id="password" name="contraseña" placeholder="Contraseña" required/>
           <small id="password-error"></small>
           <span></span>
+        </div>
+        <div class="form-control">
+          <label for="role">Rol:</label>
+          <select id="role" name="rol" required>
+            <option value="usuario">Usuario</option>
+            <option value="admin">Administrador</option>
+          </select>
         </div>
         <button type="submit" value="submit">Registrar</button>
         <span>o usa tu cuenta</span>
@@ -40,15 +47,15 @@
     </div>
 
     <div class="form-container login-container">
-      <form id="loginForm">
+      <form id="loginForm" action="/login" method="post">
         <h1>Inicia sesión aquí</h1>
         <div class="form-control2">
-          <input type="email" id="login-email" placeholder="Correo electrónico"/>
+          <input type="email" id="login-email" name="correo" placeholder="Correo electrónico" required/>
           <small id="login-email-error"></small>
           <span></span>
         </div>
         <div class="form-control2">
-          <input type="password" id="login-password" placeholder="Contraseña"/>
+          <input type="password" id="login-password" name="contraseña" placeholder="Contraseña" required/>
           <small id="login-password-error"></small>
           <span></span>
         </div>

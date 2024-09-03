@@ -1,6 +1,6 @@
 const Sequelize  = require('sequelize'); // Requerir Sequelize de la librería correcta
 const dotenv = require('dotenv');
-const User = require('../Models/User');
+const Usuario = require('../Models/User');
 const Admin = require('../Models/Admin');
 const Room = require('../Models/Room');
 const Reservation = require('../Models/Reservation');
@@ -33,6 +33,6 @@ sequelize.sync({ alter: true })
 
 
 module.exports = {
-  Sequelize
+  sequelize
 };
 
