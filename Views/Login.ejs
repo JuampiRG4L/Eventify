@@ -5,12 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Formulario</title>
+  <link rel="stylesheet" href="/Public/Css/loading_screen.css">
+  <link rel="stylesheet" href="/Public/Css/header_l.css">
   <link rel="stylesheet" type="text/css" href="/Public/Css/LoginStyle.css"/>
   <link rel="shortcut icon" href="/Public/img/Icono_l.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+  <div id="loading-screen">
+    <div class="spinner"></div>
+  </div>
+  <header id="menu">
+    <div class="logo">
+        <p class="logot"><a href="/index" class="link">EVENTIFY</a></p>
+    </div>
+    <nav class="nav">
+        <ul class="list">
+            <li class="item">
+                <a href="/index" class="link">INICIO</a>
+            </li>    
+        </ul>
+    </nav>
+</header>
   <div class="container" id="container">
     <div class="form-container register-container">
       <form id="registerForm" action="/register" method="post">
@@ -108,7 +126,8 @@
       </div>
     </div>
   </div>
-  <script src="/Public/Js/Style.js" type="text/javascript"></script>
-  <script src="/Public/Js/Main.js" type="text/javascript"></script>
 </body>
+<script src="/Public/Js/loading_screen.js"></script>
+<script src="/Public/Js/Style.js" type="text/javascript"></script>
+<script src="/Public/Js/Main.js" type="text/javascript"></script>
 </html>

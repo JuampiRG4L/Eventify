@@ -1,13 +1,11 @@
-// Modelo de usuario
+const { Sequelize, DataTypes } = require('sequelize');
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('your_database_name', 'your_username', 'your_password', {
-    host: 'your_database_host',
-    dialect: 'mysql' // or 'postgres', 'sqlite', etc.
+const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql', 
 });
 
-module.exports = (sequelize, DataTypes) => {
-    const Usuario = sequelize.define('usuario', {
+const Usuario = sequelize.define('Usuario', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -24,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     contraseña: {
         type: DataTypes.STRING,
-        allowNull: true // Permite null para usuarios que se registren mediante Facebook
+        allowNull: true
     },
     proveedor: {
         type: DataTypes.ENUM('local', 'facebook'),
@@ -33,15 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     id_proveedor: {
         type: DataTypes.STRING,
-        allowNull: true // Solo se usa si el proveedor no es 'local'
-    },
-    creado_en: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
-    },
-    actualizado_en: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
+        allowNull: true
     }
 }, {
     tableName: 'Usuarios',
@@ -49,5 +39,5 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: 'creado_en',
     updatedAt: 'actualizado_en'
 });
-    return Usuario
-};
+
+module.exports = Usuario;

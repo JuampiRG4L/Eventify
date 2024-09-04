@@ -26,6 +26,6 @@
     "passport-google-oauth20": "^2.0.0",
     "proyect_eventify": "file:",
     "sequelize": "^6.37.3",
-    "sweetalert2": "^11.12.4"
+    "sweetalert2": "^11.13.1"
   }
 }

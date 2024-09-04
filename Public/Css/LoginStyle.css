@@ -12,14 +12,13 @@ body {
   flex-direction: column;
   font-family: "Poppins", sans-serif;
   overflow: hidden;
-  height: 100vh;
 }
 
 h1 {
   font-weight: 700;
   letter-spacing: -1.5px;
   margin: 0;
-  margin-bottom: 15px;
+  margin-top: 20px;
 }
 
 h1.title {
@@ -129,7 +128,7 @@ button.ghost i {
   position: absolute;
   opacity: 1;
   transition: 0.3s ease-in-out;
-  z-index: 6;
+  z-index: 3;
 }
 
 button.ghost i.register {
@@ -207,7 +206,7 @@ input {
   top: 50px;
   left: 0;
   font-size: 12px;
-  z-index: 100;
+  z-index: 4;
 }
 
 .form-control span {
@@ -229,7 +228,7 @@ input {
   top: 50px;
   left: 0;
   font-size: 12px;
-  z-index: 100;
+  z-index: 4;
 }
 
 .form-control2 span {
@@ -248,7 +247,7 @@ input {
 .login-container {
   left: 0;
   width: 50%;
-  z-index: 2;
+  z-index: 1;
 }
 
 .container.right-panel-active .login-container {
@@ -259,13 +258,13 @@ input {
   left: 0;
   width: 50%;
   opacity: 0;
-  z-index: 1;
+  z-index: 0;
 }
 
 .container.right-panel-active .register-container {
   transform: translateX(100%);
   opacity: 1;
-  z-index: 5;
+  z-index: 2;
   animation: show 0.6s;
 }
 
@@ -273,13 +272,13 @@ input {
   0%,
   49.99% {
     opacity: 0;
-    z-index: 1;
+    z-index: 0;
   }
 
   50%,
   100% {
     opacity: 1;
-    z-index: 5;
+    z-index: 2;
   }
 }
 
@@ -291,7 +290,7 @@ input {
   height: 100%;
   overflow: hidden;
   transition: transform 0.6s ease-in-out;
-  z-index: 100;
+  z-index: 4;
 }
 
 .container.right-panel-active .overlay-container {
@@ -363,7 +362,7 @@ input {
 }
 
 .social-container {
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
 .social-container a {
