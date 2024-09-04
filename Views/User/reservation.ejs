@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservas</title>
+    <link rel="stylesheet" href="/Public/Css/loading_screen.css">
     <link rel="stylesheet" href="/Public/Css/reservations.css">
     <link rel="stylesheet" href="/Public/Css/header.css">
     <link rel="shortcut icon" href="/Public/img/Icono_l.ico" type="image/x-icon">
@@ -11,6 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+    </div>
     <header id="menu">
         <div class="logo">
             <p class="logot"><a href="/index" class="link">EVENTIFY</a></p>
@@ -43,7 +47,7 @@
                 <!-- Aquí se insertará el contenido dinámico -->
             </div>
         </div>
-        <script src="/Public/Js/reservation.js"></script>
-    </body>
-    </html>
-
+</body>
+<script src="/Public/Js/loading_screen.js"></script>
+<script src="/Public/Js/reservation.js"></script>
+</html>

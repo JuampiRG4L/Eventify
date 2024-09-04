@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Información Salón</title>
+    <link rel="stylesheet" href="/Public/Css/loading_screen.css">
     <link rel="stylesheet" href="/Public/Css/footer.css">
     <link rel="stylesheet" href="/Public/Css/sub_halls.css">
     <link rel="stylesheet" href="/Public/Css/header.css">
@@ -12,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+    </div>
     <header id="menu">
         <div class="logo">
             <p class="logot"><a href="/index" class="link">EVENTIFY</a></p>
@@ -40,7 +44,7 @@
         <h1 class="title">SALÓN AURORA</h1>
         <div class="content">
             <div class="imagen">
-                <img src="/Public/img/sol.jpg" alt="" class="img">
+                <img src="/Public/img/Salon2.jpg" alt="" class="img">
             </div>
             <div class="info">
                 <div class="info-p">
@@ -49,6 +53,25 @@
                     <p class="text">CAPACIDAD: 100 PERSONAS</p>
                     <button id="" class="btn">PAGAR</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container_text">
+        <h3 class="title_text_sub">Lo que ofrece el Salón Aurora</h3>
+        <div class="text_sub_h">
+            <div class="text_sub">
+                <p class="text_alb"><img src="/Public/img/cocinero.png" alt="" class="img_text_sub">Cocina equipada para catering de eventos</p>
+                <p class="text_alb"><img src="/Public/img/Wi-Fi.png" alt="" class="img_text_sub">Wifi de 26 Mbps para todas las necesidades tecnológicas</p>
+                <p class="text_alb"><img src="/Public/img/Estacionamiento.png" alt="" class="img_text_sub">Estacionamiento amplio y gratuito</p>
+                <p class="text_alb"><img src="/Public/img/Guardar.png" alt="" class="img_text_sub">Guarda de objetos para organizadores antes y después del evento</p>
+                <p class="text_alb"><img src="/Public/img/Jardin.png" alt="" class="img_text_sub">Jardín parcialmente cercado, ideal para fotos y actividades al aire libre</p>
+            </div>
+            <div class="text_sub">
+                <p class="text_alb"><img src="/Public/img/Balcon.png" alt="" class="img_text_sub">Balcón privado con vistas relajantes</p>
+                <p class="text_alb"><img src="/Public/img/Adorno.png" alt="" class="img_text_sub">Decoración moderna y personalizable para reflejar el estilo del evento</p>
+                <p class="text_alb"><img src="/Public/img/Sonido.png" alt="" class="img_text_sub">Sistema de sonido y tecnología audiovisual moderna</p>
+                <p class="text_alb"><img src="/Public/img/Baño.png" alt="" class="img_text_sub">Baños amplios y bien mantenidos para la comodidad de los invitados</p>
+                <p class="text_alb"><img src="/Public/img/Discapacitado.png" alt="" class="img_text_sub">Acceso para personas con movilidad reducida</p>
             </div>
         </div>
     </div>
@@ -65,7 +88,7 @@
             <ul class="ul-f">
                 <li class="li-f-h"><h3 class="text-f">Contáctanos</h3></li>
                 <li class="li-f"><p class="text-fc"><img src="/Public/img/telefono.png" alt="" class="img-i">Teléfono: +57 3012342123</p></li>
-                <li class="li-f"><p class="text-fc"><img src="/Public/img/correo.png" alt="" class="img-i">Correo: Eventify@gmail.com</p></li>
+                <li class="li-f"><p class="text-fc"><img src="/Public/img/correo.png" alt="" class="img-i">Correo: EventifyASP@gmail.com</p></li>
                 <li class="li-f"><p class="text-fc"><img src="/Public/img/direccion.png" alt="" class="img-i">Dirección: Calle xyz, Medellín - Colombia</p></li>
                 <li class="li-f"><a href="#" class="link-f">Envíanos un Mensaje</a></li>
             </ul>
@@ -83,5 +106,6 @@
         </div>
     </footer>
 </body>
+<script src="/Public/Js/loading_screen.js"></script>
 <script src="./js/header.js"></script>
 </html>
