@@ -9,10 +9,11 @@ CREATE TABLE Usuarios (
     contraseña VARCHAR(255) NOT NULL,
     proveedor ENUM('local', 'facebook') NOT NULL,
     id_proveedor VARCHAR(255),
-    rol ENUM('usuario', 'admin') DEFAULT 'usuario', 
+    rol ENUM('usuario', 'admin') DEFAULT 'usuario',
     creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
 
 
 CREATE TABLE Administradores (

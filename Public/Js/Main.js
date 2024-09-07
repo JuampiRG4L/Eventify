@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Selección de elementos del formulario de inicio de sesión
     const lgForm = document.querySelector(".login-container form");
-    const emailLg = document.querySelector('.email-2');
-    const passwordLg = document.querySelector('.password-2');
-    const emailErrorLg = document.querySelector(".email-error-2");
-    const passwordErrorLg = document.querySelector(".password-error-2");
+    const emailLg = document.getElementById('login-email');  // Corregido
+    const passwordLg = document.getElementById('login-password');  // Corregido
+    const emailErrorLg = document.getElementById("login-email-error");  // Corregido
+    const passwordErrorLg = document.getElementById("login-password-error");  // Corregido
 
     // Registro de usuario
     regForm.addEventListener('submit', async function(e) {

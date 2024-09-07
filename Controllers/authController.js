@@ -3,6 +3,7 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
+const { Op } = require('sequelize');  // Asegúrate de importar Op para usarlo en consultas
 const RestablecimientoContraseña = require('../Models/RestablecimientoContraseña');
 const User = require('../Models/User');
 const Admin  = require('../Models/Admin');
@@ -10,8 +11,52 @@ const Payment  = require('../Models/Payment');
 const Room  = require('../Models/Room');
 const Reservation = require('../Models/Reservation')
 
+// Controlador para registrar un usuario
+async function registrarUsuario(req, res) {
+    const { nombre, correo, contraseña, proveedor, rol } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(contraseña, 10);
+        const newUser = await User.create({
+            nombre,
+            correo,
+            contraseña: proveedor === 'local' ? hashedPassword : null,
+            proveedor,
+            id_proveedor: proveedor !== 'local' ? generarIdProveedor() : null,
+            rol: rol || 'user'  // Asignar rol 'user' por defecto si no se proporciona
+        });
+        res.status(201).json({ success: true, message: 'Usuario registrado exitosamente' });
+    } catch (error) {
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            res.status(400).json({ success: false, message: 'El correo ya está registrado' });
+        } else {
+            console.error(error);
+            res.status(500).json({ success: false, message: 'Hubo un problema al registrar el usuario' });
+        }
+    }
+}
+
+// Controlador para iniciar sesión
+async function loginUsuario(req, res) {
+    const { correo, contraseña } = req.body;
+    try {
+        const usuario = await User.findOne({ where: { correo } });
+        if (!usuario) {
+            return res.status(404).json({ success: false, message: 'Usuario no encontrado' });
+        }
+
+        const esCoincidente = await bcrypt.compare(contraseña, usuario.contraseña);
+        if (!esCoincidente) {
+            return res.status(400).json({ success: false, message: 'Contraseña incorrecta' });
+        }
+        res.status(200).json({ success: true, message: 'Inicio de sesión exitoso' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Error al iniciar sesión' });
+    }
+}
+
 // Controlador para solicitar restablecimiento de contraseña
-async function solicitarRestablecimiento (req, res) {
+async function solicitarRestablecimiento(req, res) {
     try {
         const { correo } = req.body;
         const usuario = await User.findOne({ where: { correo } });
@@ -76,7 +121,7 @@ async function solicitarRestablecimiento (req, res) {
 };
 
 // Controlador para restablecer la contraseña
-async function restablecerContraseña (req, res) {
+async function restablecerContraseña(req, res) {
     try {
         const { token } = req.params;
         const { contraseña } = req.body;
@@ -125,9 +170,10 @@ async function restablecerContraseña (req, res) {
     }
 };
 
-
+// Exporta las funciones
 module.exports = {
     solicitarRestablecimiento,
-    restablecerContraseña
+    restablecerContraseña,
+    registrarUsuario,
+    loginUsuario
 };
-

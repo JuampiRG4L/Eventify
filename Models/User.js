@@ -32,6 +32,11 @@ const Usuario = sequelize.define('Usuario', {
     id_proveedor: {
         type: DataTypes.STRING,
         allowNull: true
+    },
+    rol: {  // Añade este campo
+        type: DataTypes.ENUM('admin', 'user'),
+        allowNull: false,
+        defaultValue: 'user'
     }
 }, {
     tableName: 'Usuarios',

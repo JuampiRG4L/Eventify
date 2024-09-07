@@ -1,4 +1,4 @@
-// Middleware verifica que el usuario este autenticado y si ya inicio sesion
+// Middleware/auth.js
 
 function isAdmin(req, res, next) {
     if (req.user && req.user.rol === 'admin') {
@@ -16,12 +16,12 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-
 function ensureAdmin(req, res, next) {
     if (req.user && req.user.rol === 'admin') {
         return next();
     }
     res.redirect('/login');
+    res.status(403).json({ message: 'Acceso denegado. Necesitas ser administrador.' });
 }
 
 module.exports = {

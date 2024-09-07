@@ -1,12 +1,14 @@
 const express = require('express');
 const  Usuario  = require('../Models/User');
-const  Admin  = require('../Models/Admin');
-const  Payment  = require('../Models/Payment');
-const  RestablecimientoContraseña  = require('../Models/RestablecimientoContraseña');
-const  Room  = require('../Models/Room');
 const router = express.Router();
 const { isAdmin, isAuthenticated } = require('../Middleware/auth');
 const { ensureAdmin } = require('../Middleware/auth');
+const adminController = require('../Controllers/adminController');
+const authController = require('../Controllers/authController'); // Asegúrate de que la ruta sea correcta
+
+
+router.post('/registrarUsuario', authController.registrarUsuario);
+router.post('/promote', ensureAdmin, adminController.promoverAAdmin);
 
 // Ruta protegida para el dashboard
 router.get('/dashboard', ensureAdmin, (req, res) => {
