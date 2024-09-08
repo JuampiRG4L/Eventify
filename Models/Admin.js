@@ -1,3 +1,5 @@
+// Modelo Admin
+
 const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
@@ -45,4 +47,4 @@ const Administrador = sequelize.define('Administrador', {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = { Administrador, sequelize };
+module.exports = Administrador, sequelize;

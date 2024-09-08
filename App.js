@@ -6,7 +6,7 @@ const passport = require('passport');
 const session = require('express-session');
 const path = require('path');
 const Swal = require('sweetalert2');
-
+require('./config/db');
 
 const app = express();
 
@@ -86,7 +86,7 @@ app.get('/user/payments', (req, res) => {
 });
 
 // Puerto
-const PORT = process.env.PORT || 3308;
+const PORT = 3308;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

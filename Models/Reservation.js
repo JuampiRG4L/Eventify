@@ -25,7 +25,7 @@ const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
     id_salon: {
         type: DataTypes.INTEGER,
         references: {
-            model: Salon,
+            model: 'Salones',
             key: 'id'
         },
         allowNull: false
@@ -70,5 +70,5 @@ const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = { Reservacion };
+module.exports =  Reservacion, sequelize ;
 

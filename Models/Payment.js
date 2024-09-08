@@ -1,4 +1,4 @@
-// Modelo para pagos
+// Modelo Pagos
 const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
@@ -15,7 +15,7 @@ const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
     id_reservacion: {
         type: DataTypes.INTEGER,
         references: {
-            model: Reservacion,
+            model: 'Reservaciones',
             key: 'id'
         },
         allowNull: false
@@ -48,7 +48,5 @@ const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
     updatedAt: 'actualizado_en'
 });
 
-module.exports ={
-    Pago
-};
+module.exports =  Pago, sequelize;
 
