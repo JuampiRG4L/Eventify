@@ -31,8 +31,9 @@ const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
     }
 }, {
     tableName: 'RestablecimientoContraseña',
-    timestamps: false
+    timestamps: false,
+    createdAt: 'creado_en'
 });
 
-module.exports = { restablecimientoContraseña };
+module.exports =  restablecimientoContraseña, sequelize ;
 

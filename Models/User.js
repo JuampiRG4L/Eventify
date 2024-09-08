@@ -45,4 +45,4 @@ const Usuario = sequelize.define('Usuario', {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = { Usuario, sequelize };
+module.exports = Usuario, sequelize ;
