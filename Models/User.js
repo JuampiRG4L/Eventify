@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
     host: 'localhost',
-    dialect: 'mysql', 
+    dialect: 'mysql',
 });
 
 const Usuario = sequelize.define('Usuario', {
@@ -22,7 +22,7 @@ const Usuario = sequelize.define('Usuario', {
     },
     contraseña: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
     proveedor: {
         type: DataTypes.ENUM('local', 'facebook'),
@@ -33,11 +33,11 @@ const Usuario = sequelize.define('Usuario', {
         type: DataTypes.STRING,
         allowNull: true
     },
-    rol: {  // Añade este campo
-        type: DataTypes.ENUM('admin', 'user'),
+    rol: {
+        type: DataTypes.ENUM('admin', 'usuario'),
         allowNull: false,
-        defaultValue: 'user'
-    }
+        defaultValue: 'usuario'
+    },
 }, {
     tableName: 'Usuarios',
     timestamps: true,
@@ -45,4 +45,4 @@ const Usuario = sequelize.define('Usuario', {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = Usuario;
+module.exports = { Usuario, sequelize };

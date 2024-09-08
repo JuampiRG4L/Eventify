@@ -1,8 +1,13 @@
 //Modelo de reservación
 const Usuario = require('./User'); // Modelo de Usuario
 const Salon = require('./Room'); // Modelo de Salon
+const { Sequelize, DataTypes } = require('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
+const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql',
+});
+
     const Reservacion = sequelize.define('Reservacion', {
     id: {
         type: DataTypes.INTEGER,
@@ -65,7 +70,5 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = {
-    Reservacion
-};
-}
+module.exports = { Reservacion };
+

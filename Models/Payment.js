@@ -1,7 +1,11 @@
 // Modelo para pagos
-const Reservacion = require('./Reservation'); // Modelo de Reservacion
+const { Sequelize, DataTypes } = require('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
+const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql',
+});
+
     const Pago = sequelize.define('Pago', {
     id: {
         type: DataTypes.INTEGER,
@@ -47,4 +51,4 @@ module.exports = (sequelize, DataTypes) => {
 module.exports ={
     Pago
 };
-}
+

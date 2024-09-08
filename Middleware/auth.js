@@ -1,31 +1,43 @@
-// Middleware/auth.js
+const jwt = require('jsonwebtoken');
 
-function isAdmin(req, res, next) {
-    if (req.user && req.user.rol === 'admin') {
-        return next();
-    } else {
-        return res.status(403).json({ message: 'Acceso denegado. Solo para administradores.' });
-    }
-}
-
+// Middleware para verificar si el usuario está autenticado
 function isAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        return res.status(401).json({ message: 'Debes iniciar sesión' });
-    }
+  const token = req.headers['authorization'];
+  if (!token) {
+    return res.status(401).json({ message: 'Acceso denegado. No se proporcionó token.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.User = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'Token inválido o expirado.' });
+  }
 }
 
+// Middleware para verificar si el usuario es administrador
 function ensureAdmin(req, res, next) {
-    if (req.user && req.user.rol === 'admin') {
-        return next();
-    }
-    res.redirect('/login');
-    res.status(403).json({ message: 'Acceso denegado. Necesitas ser administrador.' });
+  if (req.User && req.User.rol === 'admin') {
+    return next();
+  }
+  return res.status(403).json({ message: 'Acceso denegado. Necesitas ser administrador.' });
+}
+
+function verificarRol(rolesPermitidos) {
+  return (req, res, next) => {
+      const User = req.User; // Supongamos que el usuario ya está autenticado y disponible en req.usuario
+
+      if (!rolesPermitidos.includes(User.rol)) {
+          return res.status(403).json({ message: 'No tienes permisos para acceder a este recurso' });
+      }
+
+      next();
+  };
 }
 
 module.exports = {
-    isAdmin,
-    isAuthenticated,
-    ensureAdmin,
+  isAuthenticated,
+  ensureAdmin,
+  verificarRol
 };
