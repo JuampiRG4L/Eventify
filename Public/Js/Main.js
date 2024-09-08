@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Selección de elementos del formulario de inicio de sesión
     const lgForm = document.querySelector(".login-container form");
-    const emailLg = document.getElementById('login-email');  // Corregido
-    const passwordLg = document.getElementById('login-password');  // Corregido
-    const emailErrorLg = document.getElementById("login-email-error");  // Corregido
-    const passwordErrorLg = document.getElementById("login-password-error");  // Corregido
+    const emailLg = document.getElementById('login-email');
+    const passwordLg = document.getElementById('login-password');
+    const emailErrorLg = document.getElementById("login-email-error");
+    const passwordErrorLg = document.getElementById("login-password-error");
 
     // Registro de usuario
     regForm.addEventListener('submit', async function(e) {
@@ -35,7 +35,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const correo = emailReg.value;
             const contraseña = passwordReg.value;
             const proveedor = 'local';
-            const id_proveedor = null;
+            const id_proveedor = null;  // Si no se necesita, puedes dejarlo como null
+            const rol = 'user';  // Asignar 'user' por defecto
 
             try {
                 const response = await fetch('/auth/register', {
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ nombre, correo, contraseña, proveedor, id_proveedor })
+                    body: JSON.stringify({ nombre, correo, contraseña, proveedor, id_proveedor, rol })
                 });
 
                 const data = await response.json();
@@ -93,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         title: 'Inicio de Sesión Exitoso',
                         text: data.message,
                     }).then(() => {
-                        window.location.href = '/dashboard'; // Redirige a la página deseada
+                        window.location.href = '/index'; // Redirige a la página deseada
                     });
                 } else {
                     Swal.fire({

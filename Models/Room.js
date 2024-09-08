@@ -1,8 +1,13 @@
 // Modelo de salón
 
 const Admin = require('./Admin'); // MOdelo del administrador
+const { Sequelize, DataTypes } = require('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
+const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql',
+});
+
     const Salon = sequelize.define('Salon', {
     id: {
         type: DataTypes.INTEGER,
@@ -60,7 +65,4 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'actualizado_en'
 });
 
-module.exports = {
-    Salon
-};
-}
+module.exports = { Salon };

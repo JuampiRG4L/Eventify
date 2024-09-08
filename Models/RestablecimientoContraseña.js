@@ -1,6 +1,11 @@
 // Modelo para Cambiar contraseña
+const { Sequelize, DataTypes } = require('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
+const sequelize = new Sequelize('ProyectoEventify', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql',
+});
+
     const restablecimientoContraseña = sequelize.define('restablecimientoContraseña', {
     id: {
         type: DataTypes.INTEGER,
@@ -29,7 +34,5 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
 });
 
-module.exports = {
-    restablecimientocontraseña
-};
-}
+module.exports = { restablecimientoContraseña };
+
