@@ -148,3 +148,11 @@
 .img_text_sub {
     margin-right: 10px;
 }
+
+#map {
+    margin-top: 20px; /* Espacio entre el botón y el mapa */
+    height: 400px;    /* Altura del mapa */
+    width: 100%;      /* Ancho del mapa */
+}
+
+

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/Public/Css/footer.css">
     <link rel="stylesheet" href="/Public/Css/sub_halls.css">
     <link rel="stylesheet" href="/Public/Css/header.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <link rel="shortcut icon" href="/Public/img/Icono_l.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
@@ -72,6 +73,9 @@
                 <p class="text_alb"><img src="/Public/img/Sonido.png" alt="" class="img_text_sub">Sistema de sonido y tecnología audiovisual moderna</p>
                 <p class="text_alb"><img src="/Public/img/Baño.png" alt="" class="img_text_sub">Baños amplios y bien mantenidos para la comodidad de los invitados</p>
                 <p class="text_alb"><img src="/Public/img/Discapacitado.png" alt="" class="img_text_sub">Acceso para personas con movilidad reducida</p>
+                
+                <div id="map" style="height: 400px; width: 100%;"></div>
+
             </div>
         </div>
     </div>
@@ -106,6 +110,8 @@
         </div>
     </footer>
 </body>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script src="/Public/Js/map.js"></script> 
 <script src="/Public/Js/loading_screen.js"></script>
 <script src="./js/header.js"></script>
 </html>
