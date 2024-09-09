@@ -58,11 +58,12 @@ app.use('/auth', authRoutes);
 const userRoutes = require('./Routes/userRoutes');
 app.use('/user', userRoutes);
 
-const adminRoutes = require('./Routes/adminRoutes');
+const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de tener este archivo
 app.use('/admin', adminRoutes);
 
+// Rutas de vistas
 app.get('/', (req, res) => {
-  res.render('User/index'); // O se puede renderizar una vista
+  res.render('User/index'); // Renderizar vista principal de usuario
 });
 
 app.get('/index', (req, res) => {
