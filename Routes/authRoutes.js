@@ -1,15 +1,11 @@
-// authRoutes.js
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const { Usuario } = require('../Models/User');
-const { Administrador } = require('../Models/Admin')
-const { registrarUsuario, iniciarSesion } = require('../Controllers/authController');
+const userController = require('../Controllers/userController');
 
-// Registro de usuario
-router.post('/register', registrarUsuario);
 
-// Inicio de sesión de usuario
-router.post('/login', iniciarSesion);
+
+router.post('/register', userController.registrarUsuario); // Asegúrate de que esté correctamente definida
+router.post('/login', userController.loginUsuario);
+console.log('Rutas POST /register y /login configuradas correctamente');
 
 module.exports = router;
