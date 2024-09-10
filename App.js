@@ -5,7 +5,6 @@ const mysql = require('mysql2/promise');
 const passport = require('passport');
 const session = require('express-session');
 const path = require('path');
-const Swal = require('sweetalert2');
 require('./config/db');
 
 const app = express();
@@ -16,13 +15,6 @@ const db = mysql.createPool({
   user: 'root',
   password: '',
   database: 'ProyectoEventify'
-
-  /*
-  host: 'sql302.infinityfree.com',
-  user: 'if0_37016621',
-  password: '62yFFArM5M',
-  database: 'ProyectoEventify'
-  */
 });
 
 app.use(bodyParser.json());
@@ -53,13 +45,8 @@ app.use((req, res, next) => {
 
 // Rutas
 const authRoutes = require('./Routes/authRoutes');
-app.use('/auth', authRoutes);
-
-const userRoutes = require('./Routes/userRoutes');
-app.use('/user', userRoutes);
-
-const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de tener este archivo
-app.use('/admin', adminRoutes);
+app.use('/', authRoutes);
+console.log('Rutas de autenticación cargadas');
 
 // Rutas de vistas
 app.get('/', (req, res) => {
@@ -86,8 +73,41 @@ app.get('/user/payments', (req, res) => {
   res.render('User/payments');
 });
 
+// Manejo de errores y puerto
+app.use((req, res, next) => {
+  res.status(404).send('Página no encontrada');
+});
+
+// Rutas para administradores
+const auth = require('./Middleware/auth')
+app.get('/admin/dashboard', auth.ensureAdmin, (req, res) => {
+  res.render('Admin/dashboard');  // Redirige al dashboard de admin
+});
+
+app.get('/admin/add-room', auth.ensureAdmin, (req, res) => {
+  res.render('Admin/addRoom');  // Redirige a la página para agregar salones
+});
+
+app.get('/admin/edit-room', auth.ensureAdmin, (req, res) => {
+  res.render('Admin/editRoom');  // Redirige a la página para editar salones
+});
+
+
+app.get('/reservation', auth.ensureAdmin, (req, res) => {
+  res.render('User/reservation');
+});
+
+// Ejemplo de ruta para perfil, debería usar `userController` si es necesario
+app.get('/perfil', auth.isAuthenticated, (req, res) => {
+  res.json({ message: 'Perfil del usuario', user: req.user });
+});
+
+app.get('/halls', (req, res) => {
+  res.render('User/halls');
+});
+
 // Puerto
-const PORT = 3308;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

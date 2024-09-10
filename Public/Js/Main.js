@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const usernameReg = document.getElementById('username');
     const emailReg = document.getElementById('email');
     const passwordReg = document.getElementById('password');
+    const roleSelect = document.getElementById('role'); // Selección del rol
     const usernameErrorReg = document.getElementById('username-error');
     const emailErrorReg = document.getElementById('email-error');
     const passwordErrorReg = document.getElementById('password-error');
@@ -36,10 +37,10 @@ document.addEventListener("DOMContentLoaded", function() {
             const contraseña = passwordReg.value;
             const proveedor = 'local';
             const id_proveedor = null;  // Si no se necesita, puedes dejarlo como null
-            const rol = 'user';  // Asignar 'user' por defecto
+            const rol = roleSelect.value;  // Obtener el valor seleccionado del rol
 
             try {
-                const response = await fetch('/auth/register', {
+                const response = await fetch('/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -72,46 +73,51 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Inicio de sesión
-    lgForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        if (!checkRequired([emailLg, passwordLg])) {
-            const correo = emailLg.value;
-            const contraseña = passwordLg.value;
+lgForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!checkRequired([emailLg, passwordLg])) {
+        const correo = emailLg.value;
+        const contraseña = passwordLg.value;
 
-            try {
-                const response = await fetch('/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ correo, contraseña })
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ correo, contraseña })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Inicio de Sesión Exitoso',
+                    text: data.message,
+                }).then(() => {
+                    // Redirige según el rol del usuario
+                    if (data.rol === 'admin') {
+                        window.location.href = '/admin/dashboard';
+                    } else {
+                        window.location.href = '/index'; // O la ruta que desees para usuarios normales
+                    }
                 });
-
-                const data = await response.json();
-                if (response.ok) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Inicio de Sesión Exitoso',
-                        text: data.message,
-                    }).then(() => {
-                        window.location.href = '/index'; // Redirige a la página deseada
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: data.message,
-                    });
-                }
-            } catch (error) {
+            } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Ocurrió un error durante el inicio de sesión.',
+                    text: data.message,
                 });
             }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Ocurrió un error durante el inicio de sesión.',
+            });
         }
-    });
+    }
+});
 
     // Validación de campos requeridos
     function checkRequired(inputs) {
