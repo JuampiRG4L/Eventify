@@ -148,6 +148,12 @@ header {
     color: white;
 }
 
+@media (max-width: 768px) {
+    .text {
+        font-size: 35px;
+    }
+}
+
 .txt {
     display: flex;
     justify-content: center;
