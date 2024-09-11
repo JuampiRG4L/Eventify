@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Formulario</title>
   <link rel="stylesheet" href="/Public/Css/loading_screen.css">
-  <link rel="stylesheet" href="/Public/Css/header_l.css">
+  <link rel="stylesheet" href="/Public/Css/header.css">
   <link rel="stylesheet" type="text/css" href="/Public/Css/LoginStyle.css"/>
   <link rel="shortcut icon" href="/Public/img/Icono_l.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
@@ -18,110 +18,117 @@
     <div class="spinner"></div>
   </div>
   <header id="menu">
-    <div class="logo">
-        <p class="logot"><a href="/index" class="link">EVENTIFY</a></p>
-    </div>
     <nav class="nav">
-        <ul class="list">
+      <div class="menu-toggle" id="menu-toggle">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+        <ul class="list" id="enlaces">
+            <li class="item">
+              <a href="/index" class="link">EVENTIFY</a>
+            </li>
             <li class="item">
                 <a href="/index" class="link">INICIO</a>
             </li>
         </ul>
     </nav>
-</header>
-  <div class="container" id="container">
-    <div class="form-container register-container">
-      <form id="registerForm" action="/register" method="post">
-        <h1>Regístrate aquí</h1>
-        <div class="form-control">
-          <input type="text" id="username" name="nombre" placeholder="Nombre" required/>
-          <small id="username-error"></small>
-          <span></span>
-        </div>
-        <div class="form-control">
-          <input type="email" id="email" name="correo" placeholder="Correo electrónico" required/>
-          <small id="email-error"></small>
-          <span></span>
-        </div>
-        <div class="form-control">
-          <input type="password" id="password" name="contraseña" placeholder="Contraseña" required/>
-          <small id="password-error"></small>
-          <span></span>
-        </div>
-        <div class="form-control">
-          <label for="role">Rol:</label>
-          <select id="role" name="rol" required>
-            <option value="usuario">Usuario</option>
-            <option value="admin">Administrador</option>
-          </select>
-        </div>
-        <button type="submit" value="submit">Registrar</button>
-        <span>o usa tu cuenta</span>
-        <div class="social-container">
-          <a href="/auth/facebook" class="social"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="/auth/google" class="social"><i class="fa-brands fa-google"></i></a>
-        </div>
-      </form>
-    </div>
-
-    <div class="form-container login-container">
-      <form id="loginForm" action="/login" method="post">
-        <h1>Inicia sesión aquí</h1>
-        <div class="form-control2">
-          <input type="email" id="login-email" name="correo" placeholder="Correo electrónico" required/>
-          <small id="login-email-error"></small>
-          <span></span>
-        </div>
-        <div class="form-control2">
-          <input type="password" id="login-password" name="contraseña" placeholder="Contraseña" required/>
-          <small id="login-password-error"></small>
-          <span></span>
-        </div>
-
-        <div class="content">
-          <div class="checkbox">
-            <input type="checkbox" name="checkbox" id="checkbox"/>
-            <label for="checkbox">Recuérdame</label>
+  </header>
+  <div class="container_all">
+    <div class="container" id="container">
+      <div class="form-container register-container">
+        <form id="registerForm" action="/register" method="post">
+          <h1>Regístrate aquí</h1>
+          <div class="form-control">
+            <input type="text" id="username" name="nombre" placeholder="Nombre" required/>
+            <small id="username-error"></small>
+            <span></span>
           </div>
-          <div class="pass-link">
-            <a href="/reset-password">¿Olvidaste la contraseña?</a>
+          <div class="form-control">
+            <input type="email" id="email" name="correo" placeholder="Correo electrónico" required/>
+            <small id="email-error"></small>
+            <span></span>
           </div>
-        </div>
-        <button type="submit" value="submit">Iniciar sesión</button>
-        <span>O usa tu cuenta</span>
-        <div class="social-container">
-          <a href="/auth/facebook" class="social"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="/auth/google" class="social"><i class="fa-brands fa-google"></i></a>
-        </div>
-      </form>
-    </div>
-
-    <div class="overlay-container">
-      <div class="overlay">
-        <div class="overlay-panel overlay-left">
-          <h1 class="title">
-            Bienvenidos <br/>
-            a Eventify
-          </h1>
-          <p>Si ya tienes una cuenta, inicia sesión aquí y reserva ¡ahora!</p>
-          <button class="ghost" id="login">
-            Iniciar sesión
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-        </div>
-
-        <div class="overlay-panel overlay-right">
-          <h1 class="title">
-            Comienza tu <br/>
-            experiencia ahora
-          </h1>
-          <p>
-            Si aún no tienes una cuenta, únete a nosotros y comienza tu reservación
-          </p>
-          <button class="ghost" id="register">
-            Registrarse
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
+          <div class="form-control">
+            <input type="password" id="password" name="contraseña" placeholder="Contraseña" required/>
+            <small id="password-error"></small>
+            <span></span>
+          </div>
+          <div class="form-control">
+            <label for="role">Rol:</label>
+            <select id="role" name="rol" required>
+              <option value="usuario">Usuario</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </div>
+          <button type="submit" value="submit">Registrar</button>
+          <span>o usa tu cuenta</span>
+          <div class="social-container">
+            <a href="/auth/facebook" class="social"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="/auth/google" class="social"><i class="fa-brands fa-google"></i></a>
+          </div>
+        </form>
+      </div>
+  
+      <div class="form-container login-container">
+        <form id="loginForm" action="/login" method="post">
+          <h1>Inicia sesión aquí</h1>
+          <div class="form-control2">
+            <input type="email" id="login-email" name="correo" placeholder="Correo electrónico" required/>
+            <small id="login-email-error"></small>
+            <span></span>
+          </div>
+          <div class="form-control2">
+            <input type="password" id="login-password" name="contraseña" placeholder="Contraseña" required/>
+            <small id="login-password-error"></small>
+            <span></span>
+          </div>
+  
+          <div class="content">
+            <div class="checkbox">
+              <input type="checkbox" name="checkbox" id="checkbox"/>
+              <label for="checkbox">Recuérdame</label>
+            </div>
+            <div class="pass-link">
+              <a href="/reset-password">¿Olvidaste la contraseña?</a>
+            </div>
+          </div>
+          <button type="submit" value="submit">Iniciar sesión</button>
+          <span>O usa tu cuenta</span>
+          <div class="social-container">
+            <a href="/auth/facebook" class="social"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="/auth/google" class="social"><i class="fa-brands fa-google"></i></a>
+          </div>
+        </form>
+      </div>
+  
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1 class="title">
+              Bienvenidos <br/>
+              a Eventify
+            </h1>
+            <p>Si ya tienes una cuenta, inicia sesión aquí y reserva ¡ahora!</p>
+            <button class="ghost" id="login">
+              Iniciar sesión
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+  
+          <div class="overlay-panel overlay-right">
+            <h1 class="title">
+              Comienza tu <br/>
+              experiencia ahora
+            </h1>
+            <p>
+              Si aún no tienes una cuenta, únete a nosotros y comienza tu reservación
+            </p>
+            <button class="ghost" id="register">
+              Registrarse
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -130,4 +137,5 @@
 <script src="/Public/Js/loading_screen.js"></script>
 <script src="/Public/Js/Style.js" type="text/javascript"></script>
 <script src="/Public/Js/Main.js" type="text/javascript"></script>
+<script src="/Public/Js/header.js"></script>
 </html>

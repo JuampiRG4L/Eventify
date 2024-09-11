@@ -22,37 +22,63 @@ header {
     width: 100%;
     top: 0;
     left: 0;
+    height: 110px;
 }
 
 .hidden {
     transform: translateY(-100%);
 }
 
-.logo {
-    width: 20%;
-    margin-left: 5%;
-}
-
-.logot {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    text-decoration: none;
-    color: white;
-}
-
 .nav {
-    width: 70%;
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 55px 0;
+}
+
+.menu-toggle {
+    position: relative;
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        margin: -18px 0;
+    }
+}
+
+.line {
+    width: 50px;
+    height: 4px;
+    background-color: white;
+    transition: 0.3s ease;
+    margin: 4px 0;
 }
 
 .list {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    position: absolute;
+    transition: left 2s;
+}
+
+@media (max-width: 768px) {
+    .list {
+        left: -100%;
+        top: 80px;
+    }
+}
+
+.active {
+    display: flex;
+    left: 0;
 }
 
 .item {

@@ -19,6 +19,12 @@ footer {
     justify-content: space-between;
 }
 
+@media (max-width: 768px) {
+    .content-f {
+        flex-direction: column;
+    }
+}
+
 .img-l {
     width: 300px;
     height: 300px;

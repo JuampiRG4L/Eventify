@@ -1,23 +1,22 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const menu = document.getElementById('menu');
-    let lastScrollTop = 0;
-    const sticky = menu.offsetTop;
+const menu = document.getElementById('menu');
+let lastScrollTop = 0;
+const sticky = menu.offsetTop;
 
-    function handleScroll() {
-        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+function handleScroll() {
+    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
+    if (currentScroll > sticky) {
+        menu.classList.add('sticky');
+        menu.classList.add('scrolled');
+    } else {
+        menu.classList.remove('sticky');
+        menu.classList.remove('scrolled');
+    }
+
+    if (currentScroll > lastScrollTop) {
+        // Desplazamiento hacia abajo
         if (currentScroll > sticky) {
-            menu.classList.add('sticky');
-            menu.classList.add('scrolled');
-        } else {
-            menu.classList.remove('sticky');
-            menu.classList.remove('scrolled');
-        }
-
-        if (currentScroll > lastScrollTop) {
-            // Desplazamiento hacia abajo
-            if (currentScroll > sticky) {
-                menu.classList.add('hidden');
+            menu.classList.add('hidden');
             }
         } else {
             // Desplazamiento hacia arriba
@@ -26,4 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     }
     window.addEventListener('scroll', handleScroll);
-});
+
+// Función clase Hamburguesa
+
+const MenuToggle = document.getElementById('menu-toggle');
+const enlaces = document.getElementById('enlaces');
+
+MenuToggle.addEventListener('click', () => enlaces.classList.toggle('active'));

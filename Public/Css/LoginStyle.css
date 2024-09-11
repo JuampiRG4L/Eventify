@@ -6,6 +6,9 @@
 
 body {
   background-color: #686c78;
+}
+
+.container_all {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,6 +171,7 @@ input {
   width: 768px;
   max-width: 100%;
   min-height: 500px;
+  margin-top: 15px;
 }
 
 .form-container {
