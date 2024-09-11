@@ -21,7 +21,7 @@ footer {
 
 @media (max-width: 768px) {
     .content-f {
-        flex-direction: column;
+        flex-wrap: wrap;
     }
 }
 

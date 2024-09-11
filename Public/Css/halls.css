@@ -87,6 +87,12 @@
     border-radius: 10px;
 }
 
+@media (max-width: 768px) {
+    .btn {
+        font-size: 14px;
+    }
+}
+
 /* Animación para las Cartas */
 
 .card {
@@ -95,6 +101,12 @@
     background-image: linear-gradient(163deg, #9da5d3 0%, #8c8883 100%);
     border-radius: 20px;
     transition: all 1s;
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 45%;
+    }
 }
    
 .card2 {
