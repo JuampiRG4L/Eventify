@@ -65,6 +65,10 @@ app.get('/login', (req, res) => {
   res.render('Login');
 });
 
+// app.get('/auth/google', passport.Authenticator ('google', {
+//   scope:['profile', 'email']
+// }));
+
 app.get('/reset-password', (req, res) => {
   res.render('RestablecimientoContraseña');
 });
@@ -74,9 +78,9 @@ app.get('/user/payments', (req, res) => {
 });
 
 // Manejo de errores y puerto
-app.use((req, res, next) => {
-  res.status(404).send('Página no encontrada');
-});
+// app.use((req, res, next) => {
+//   res.status(404).send('Página no encontrada');
+// });
 
 // Rutas para administradores
 const auth = require('./Middleware/auth')
@@ -92,17 +96,26 @@ app.get('/admin/edit-room', auth.ensureAdmin, (req, res) => {
   res.render('Admin/editRoom');  // Redirige a la página para editar salones
 });
 
+//DEJAR ESTO QUIETO
+// app.get('/reservation', auth.ensureAdmin, (req, res) => {
+//   res.render('User/reservation');
+// });
 
-app.get('/reservation', auth.ensureAdmin, (req, res) => {
+
+app.get('/user/reservation', (req, res) => {
   res.render('User/reservation');
 });
 
-// Ejemplo de ruta para perfil, debería usar `userController` si es necesario
-app.get('/perfil', auth.isAuthenticated, (req, res) => {
-  res.json({ message: 'Perfil del usuario', user: req.user });
+// Ejemplo de ruta para perfil, debería usar userController si es necesario
+// app.get('/perfil', auth.isAuthenticated, (req, res) => {
+//   res.json({ message: 'Perfil del usuario', user: req.user });
+// });
+
+app.get('/perfil', (req, res) => {
+  res.json({ message: 'Perfil del usuario'});
 });
 
-app.get('/halls', (req, res) => {
+app.get('/user/halls', (req, res) => {
   res.render('User/halls');
 });
 

@@ -23,11 +23,16 @@
       <div class="spinner"></div>
     </div>
     <header id="menu">
-        <div class="logo">
-            <p class="logot"><a href="/index" class="link">EVENTIFY</a></p>
-        </div>
         <nav class="nav">
-            <ul class="list">
+          <div class="menu-toggle" id="menu-toggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+            <ul class="list" id="enlaces">
+                <li class="item">
+                  <a href="/index" class="link">EVENTIFY</a>
+                </li>
                 <li class="item">
                     <a href="/index" class="link">INICIO</a>
                 </li>
@@ -48,7 +53,7 @@
                           <p><%= user.correo %></p>
                           <button onclick="cerrarSesion()">Cerrar sesión</button>
                       <% } else { %>
-                          <p><a href="/Login" class="link">Para ver tu perfil primero inicia sesion, da click aqui para iniciar</a></p>
+                          <p><a href="/Login" class="link-prof">Para ver tú perfil primero inicia sesión, toca aquí para iniciar.</a></p>
                       <% } %>
                   </div>                    
               </li>    
