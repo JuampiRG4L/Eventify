@@ -1,89 +1,63 @@
-<html></html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <title>Agregar Salon</title>
- 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Salón</title>
 </head>
 <body>
-  <h1>Agregar Salon</h1>
-  <form action="" method="POST">
-    
-    
-    <label for="names">Nombre del salon:</label>
-    <input type="text" id="nombres" name="nombres" required>   
-    
-    <label for="direction">Dirección:</label>
-    <input type="text" id="direccion" name="direccion">
+  <h1>Agregar Salón</h1>
 
-    <label for="price">Precio del salon</label>
-    <input type="text" name="direccion" name="direccion" required>
+  <form action="/admin/add-room" method="POST" enctype="multipart/form-data">
+    <label for="name">Nombre del salón:</label>
+    <input type="text" id="name" name="name" required><br><br>
 
-    <label for="image">Imagenes del salon</label>
-    <input type="image" id="image" name="imagen" required>
+    <label for="address">Dirección:</label>
+    <input type="text" id="address" name="address" required><br><br>
 
-    <form>
-        <ul>
-            <li>
-                <label>
-                    <input type="checkbox" name="cocina" value="cocina">
-                    Cocina equipada para catering de eventos
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="wifi" value="wifi">
-                    Wifi de 26 Mbps para todas las necesidades tecnológicas
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="estacionamiento" value="estacionamiento">
-                    Estacionamiento amplio y gratuito
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="guardaObjetos" value="guardaObjetos">
-                    Guarda de objetos para organizadores antes y después del evento
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="jardin" value="jardin">
-                    Jardín parcialmente cercado, ideal para fotos y actividades al aire libre
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="balcon" value="balcon">
-                    Balcón privado con vistas relajantes
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="decoracion" value="decoracion">
-                    Decoración moderna y personalizable para reflejar el estilo del evento
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="sonido" value="sonido">
-                    Sistema de sonido y tecnología audiovisual moderna
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="banos" value="banos">
-                    Baños amplios y bien mantenidos para la comodidad de los invitados
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="movilidad" value="movilidad">
-                    Acceso para personas con movilidad reducida
-                </label>
-            </li>
-        </ul>
-    </form>
-</form>
+    <label for="price">Precio del salón:</label>
+    <input type="number" id="price" name="price" required><br><br>
+
+    <label for="image">Imagen del salón:</label>
+    <input type="file" id="image" name="image" required><br><br>
+
+    <label for="capacidad">Capacidad del salón (número de personas):</label>
+    <input type="number" id="capacidad" name="capacidad" required><br><br>
+
+
+    <label for="cocina">Cocina:</label>
+    <input type="checkbox" id="cocina" name="cocina"><br><br>
+
+    <label for="wifi">WiFi:</label>
+    <input type="checkbox" id="wifi" name="wifi"><br><br>
+
+    <label for="estacionamiento">Estacionamiento:</label>
+    <input type="checkbox" id="estacionamiento" name="estacionamiento"><br><br>
+
+    <label for="guardaObjetos">Guarda Objetos:</label>
+    <input type="checkbox" id="guardaObjetos" name="guardaObjetos"><br><br>
+
+    <label for="jardin">Jardín:</label>
+    <input type="checkbox" id="jardin" name="jardin"><br><br>
+
+    <label for="balcon">Balcón:</label>
+    <input type="checkbox" id="balcon" name="balcon"><br><br>
+
+    <label for="decoracion">Decoración:</label>
+    <input type="checkbox" id="decoracion" name="decoracion"><br><br>
+
+    <label for="sonido">Sonido:</label>
+    <input type="checkbox" id="sonido" name="sonido"><br><br>
+
+    <label for="banos">Baños:</label>
+    <input type="checkbox" id="banos" name="banos"><br><br>
+
+    <label for="movilidad">Movilidad:</label>
+    <input type="checkbox" id="movilidad" name="movilidad"><br><br>
+
+    <button type="submit">Agregar Salón</button>
+    <a href="/admin/dashboard">Volver al dashboard</a>
+
+  </form>
 </body>
 </html>

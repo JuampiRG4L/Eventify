@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
 const passport = require('passport');
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
 const path = require('path');
 require('./config/db');
 
@@ -17,10 +18,13 @@ const db = mysql.createPool({
   database: 'ProyectoEventify'
 });
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
+app.use(fileUpload());
+app.use('/uploads', express.static('public/uploads'));
 app.set('views', path.join(__dirname, 'Views'));
+app.set('view engine', 'ejs');
 
 // Configuración para servir archivos estáticos
 app.use('/Public', express.static(path.join(__dirname, '/Public')));
@@ -47,6 +51,9 @@ app.use((req, res, next) => {
 const authRoutes = require('./Routes/authRoutes');
 app.use('/', authRoutes);
 console.log('Rutas de autenticación cargadas');
+
+const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
+app.use('/admin', adminRoutes);
 
 // Rutas de vistas
 app.get('/', (req, res) => {
@@ -116,7 +123,7 @@ app.get('/perfil', (req, res) => {
 });
 
 app.get('/user/halls', (req, res) => {
-  res.render('User/halls');
+  res.render('User/halls');  // Asegúrate de que la vista exista en la carpeta correcta
 });
 
 // Puerto
