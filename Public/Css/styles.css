@@ -22,37 +22,63 @@ header {
     width: 100%;
     top: 0;
     left: 0;
+    height: 110px;
 }
 
 .hidden {
     transform: translateY(-100%);
 }
 
-.logo {
-    width: 20%;
-    margin-left: 5%;
-}
-
-.logot {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    text-decoration: none;
-    color: white;
-}
-
 .nav {
-    width: 70%;
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 55px 0;
+}
+
+.menu-toggle {
+    position: relative;
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        margin: -18px 0;
+    }
+}
+
+.line {
+    width: 50px;
+    height: 4px;
+    background-color: white;
+    transition: 0.3s ease;
+    margin: 4px 0;
 }
 
 .list {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    position: absolute;
+    transition: left 2s;
+}
+
+@media (max-width: 768px) {
+    .list {
+        left: -100%;
+        top: 80px;
+    }
+}
+
+.active {
+    display: flex;
+    left: 0;
 }
 
 .item {
@@ -122,6 +148,12 @@ header {
     color: white;
 }
 
+@media (max-width: 768px) {
+    .text {
+        font-size: 35px;
+    }
+}
+
 .txt {
     display: flex;
     justify-content: center;
@@ -182,41 +214,38 @@ header {
 
 #perfilMenu {
     position: absolute;
-    top: 200%; /* Ajusta este valor para posicionar el menú más abajo */
     right: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    padding: 15px; /* Aumenta el padding para mayor espacio interno */
+    border: 2px solid #ddd;
+    border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    z-index: 1;
     display: none; /* Oculta el menú inicialmente */
-    width: 200px; /* Ajusta el ancho según sea necesario */
+    margin-right: 15px;
+    bottom: -230px;
+    padding: 10px;
+    width: 16%;
+    text-align: justify;
 }
-
 
 #perfilMenu p {
     margin: 10px 0; /* Ajusta el margen para los elementos del menú */
     font-size: 18px; /* Aumenta el tamaño de la fuente */
 }
 
-
 #perfilMenu a {
-    color: black; /* Asegúrate de que el enlace tenga un color legible */
+    color: white; /* Asegúrate de que el enlace tenga un color legible */
     font-size: 18px; /* Aumenta el tamaño de la fuente para los enlaces */
 }
+
 .image-s {
     max-width: 100%;
     width: 100%;
-
     height: 400px;
-
-
 }
 
 #perfilMenu button {
     background-color: #f1eef0;
     border: 2px solid white;
-    padding: 10px;
     border-radius: 10px;
     cursor: pointer;
     font-family: "Magra", sans-serif;
@@ -225,8 +254,14 @@ header {
     color: black;
 }
 
-
 #perfilMenu.show {
     display: block; /* Muestra el menú cuando tiene la clase 'show' */
 }
 
+.link-prof {
+    text-decoration: none;
+    font-family: "Magra", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.9);
+}

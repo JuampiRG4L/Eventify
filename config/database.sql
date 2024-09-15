@@ -26,20 +26,31 @@ CREATE TABLE Administradores (
     actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Salones (
+
+
+CREATE TABLE salones (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    image VARCHAR(255) NOT NULL,
     capacidad INT NOT NULL,
-    ubicacion VARCHAR(255) NOT NULL,
-    precio_por_hora DECIMAL(10, 2),
-    precio_por_evento DECIMAL(10, 2),
-    imagenes TEXT,
-    descripcion TEXT,
-    id_admin INT,
-    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_admin) REFERENCES Administradores(id)
+    lat DECIMAL(10, 7) NOT NULL,
+    lng DECIMAL(10, 7) NOT NULL,
+    cocina BOOLEAN DEFAULT 0,
+    wifi BOOLEAN DEFAULT 0,
+    estacionamiento BOOLEAN DEFAULT 0,
+    guardaObjetos BOOLEAN DEFAULT 0,
+    jardin BOOLEAN DEFAULT 0,
+    balcon BOOLEAN DEFAULT 0,
+    decoracion BOOLEAN DEFAULT 0,
+    sonido BOOLEAN DEFAULT 0,
+    banos BOOLEAN DEFAULT 0,
+    movilidad BOOLEAN DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
 
 CREATE TABLE Reservaciones (
     id INT AUTO_INCREMENT PRIMARY KEY,

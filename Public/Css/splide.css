@@ -23,8 +23,15 @@
     display: flex;
     justify-content: center;
     position: absolute !important;
-    left: 53%;
+    left: 67%;
     bottom: 20%;
+}
+
+@media (max-width: 768px) {
+    .carousel-m {
+        bottom: 10%;
+        left: 43%;
+    }
 }
 
 .carousel {
@@ -40,11 +47,24 @@
     text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.9);
 }
 
+@media (max-width: 768px) {
+    .text-carousel {
+        bottom: 40%;
+        width: 60%;
+    }
+}
+
 .text-t {
     font-size: 40px;
     font-family: "Kaushan Script", cursive;
     font-weight: 400;
     font-style: normal;
+}
+
+@media (max-width: 768px) {
+    .text-t {
+        font-size: 30px;
+    }
 }
 
 .text-c {
@@ -54,6 +74,12 @@
     font-family: "M PLUS 1 Code", monospace;
     font-optical-sizing: auto;
     font-style: normal;
+}
+
+@media (max-width: 768px) {
+    .text-c {
+        font-size: 17px;
+    }
 }
 
 .btn-c {
@@ -83,4 +109,11 @@
     border-top: 3px ridge #5ac3f2;
     border-bottom: 3px ridge #5ac3f2;
     border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .btn-c {
+        padding: 8px;
+        font-size: 15px;
+    }
 }

@@ -1,4 +1,11 @@
-* {
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Salones</title>
+  <style>
+    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -87,12 +94,6 @@
     border-radius: 10px;
 }
 
-@media (max-width: 768px) {
-    .btn {
-        font-size: 14px;
-    }
-}
-
 /* Animación para las Cartas */
 
 .card {
@@ -101,12 +102,6 @@
     background-image: linear-gradient(163deg, #9da5d3 0%, #8c8883 100%);
     border-radius: 20px;
     transition: all 1s;
-}
-
-@media (max-width: 768px) {
-    .card {
-        width: 45%;
-    }
 }
    
 .card2 {
@@ -126,3 +121,45 @@
     border-radius: 20px;
     transition: 2s;
 }
+  </style>
+</head>
+<body>
+  <h1>Lista de Salones</h1>
+  
+  <button onclick="location.href='/admin/add-room'">Agregar Salón</button>
+  <button onclick="location.href='/admin/dashboard'">Volver a la principal</button>
+
+  <% if (!salons || salons.length === 0) { %>
+    <p>No hay salones disponibles</p>
+  <% } else { %>
+    <div class="container">
+      <% salons.forEach((salon) => { %>
+        <div class="card">
+          <div class="card2">
+            <div class="content">
+              <div class="imagen">
+                <img src="/uploads/<%= salon.image %>" alt="Imagen del salón" class="img">
+              </div>
+              <div class="info">
+                <p class="text"><%= salon.address %></p>
+                <p class="text"><%= salon.name %></p>
+                <p class="text">$<%= salon.price %> COP NOCHE</p>
+                <p class="text">CAPACIDAD: <%= salon.capacidad %> PERSONAS</p>
+                <button onclick="location.href='/admin/sub_hallsad/<%= salon.id %>'" class="btn">MÁS INFORMACIÓN</button>
+                 <a href="/admin/edit-room/<%= salon.id %>" class="btn">Editar</a>
+                <form action="/admin/delete-room/<%= salon.id %>" method="POST" style="display:inline;">
+                  <button type="submit" class="btn">Eliminar</button>
+                </form>
+                <br>
+                <!-- Botones de editar y eliminar -->
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+
+</body>
+</html>

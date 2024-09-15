@@ -1,0 +1,227 @@
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Salón</title>
+    <style>
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+
+  .container {
+      display: flex;
+      flex-direction: column;
+      padding: 0 5%;
+  }
+
+  .title {
+      margin: 10px 0;
+  }
+
+  .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .imagen {
+      width: 60%;
+  }
+
+  .img {
+      max-width: 100%;
+      border-radius: 10px;
+  }
+
+  .info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 40%;
+  }
+
+  .info-p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border: 2px solid rgb(221, 221, 221);;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+      padding: 20px;
+      border-radius: 10px;
+  }
+
+  .text {
+      margin: 10px;
+  }
+
+  /* Animación para el Botón */
+
+  .btn {
+      position: relative;
+      border-left: 3px ridge #5ac3f2;
+      border-right: 3px ridge #5ac3f2;
+      outline: none;
+      background-color: transparent;
+      transition: 2s;
+      border-radius: 0.3em;
+      cursor: pointer;
+      margin: auto;
+      margin-top: 10px;
+      padding: 10px;
+      border-top: transparent;
+      border-bottom: transparent;
+      font-family: "Magra", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      font-size: 16px;
+  }
+
+  .btn:hover {
+      box-shadow: inset 0px 0px 25px #5ac3f2;
+      border-top: 3px ridge #5ac3f2;
+      border-bottom: 3px ridge #5ac3f2;
+      border-radius: 10px;
+  }
+
+  .link {
+      text-decoration: none;
+      font-family: "Magra", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      color: white;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+  }
+    
+  .link::before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      height: 3px;
+      background-color: var( white);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+  }
+    
+  .link:hover {
+      color: var( white);
+  }
+    
+  .link:hover::before {
+      transform: scaleX(1);
+  }
+
+  /* Estilos Textos */
+
+  .container_text {
+      display: flex;
+      align-items: space-between;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 20px;
+  }
+
+  .title_text_sub {
+      font-size: 30px;
+      margin-left: 6.5%;
+  }
+
+  .text_sub_h {
+      display: flex;
+      width: 54%;
+      margin-left: 5%;
+  }
+
+  .text_sub {
+      padding: 10px;
+  }
+
+  .text_alb {
+      font-size: 20px;
+      margin: 10px;
+      padding: 10px;
+      text-align: justify;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .img_text_sub {
+      margin-right: 10px;
+  }
+
+  #map {
+      margin-top: 20px; /* Espacio entre el botón y el mapa */
+      height: 400px;    /* Altura del mapa */
+      width: 100%;      /* Ancho del mapa */
+  }
+
+
+
+    </style>
+  </head>
+  <body>
+    <h1>Detalles del Salón</h1>
+    <% if (salon) { %>
+      <div class="container">
+        <div class="card">
+          <div class="card2">
+            <div class="content">
+              <div class="imagen">
+                <img src="/uploads/<%= salon.image %>" alt="Imagen del salón">
+              </div>
+              <div class="info">
+                <p class="text"><%= salon.address %></p>
+                <p class="text"><%= salon.name %></p>
+                <p class="text">$<%= salon.price %> COP NOCHE</p>
+                <p class="text">CAPACIDAD: <%= salon.capacidad %> PERSONAS</p>
+              </div>
+            </div>
+            <h3>Características Disponibles:</h3>
+            <ul>
+              <% if (salon.cocina) { %>
+                <li>Cocina</li>
+              <% } %>
+              <% if (salon.wifi) { %>
+                <li>WiFi</li>
+              <% } %>
+              <% if (salon.estacionamiento) { %>
+                <li>Estacionamiento</li>
+              <% } %>
+              <% if (salon.guardaObjetos) { %>
+                <li>Guarda Objetos</li>
+              <% } %>
+              <% if (salon.jardin) { %>
+                <li>Jardín</li>
+              <% } %>
+              <% if (salon.balcon) { %>
+                <li>Balcón</li>
+              <% } %>
+              <% if (salon.decoracion) { %>
+                <li>Decoración</li>
+              <% } %>
+              <% if (salon.sonido) { %>
+                <li>Sistema de Sonido</li>
+              <% } %>
+              <% if (salon.banos) { %>
+                <li>Baños</li>
+              <% } %>
+              <% if (salon.movilidad) { %>
+                <li>Accesibilidad para Movilidad Reducida</li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% } else { %>
+      <p>Salón no encontrado.</p>
+    <% } %>
+    <button onclick="location.href='/admin/hallsad'" class="btn">Volver a la lista</button>
+  </body>
+  </html>

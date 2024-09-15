@@ -23,11 +23,16 @@
       <div class="spinner"></div>
     </div>
     <header id="menu">
-        <div class="logo">
-            <p class="logot"><a href="/index" class="link">EVENTIFY</a></p>
-        </div>
         <nav class="nav">
-            <ul class="list">
+          <div class="menu-toggle" id="menu-toggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+            <ul class="list" id="enlaces">
+                <li class="item">
+                  <a href="/index" class="link">EVENTIFY</a>
+                </li>
                 <li class="item">
                     <a href="/index" class="link">INICIO</a>
                 </li>
@@ -48,7 +53,7 @@
                           <p><%= user.correo %></p>
                           <button onclick="cerrarSesion()">Cerrar sesión</button>
                       <% } else { %>
-                          <p><a href="/Login" class="link">Para ver tu perfil primero inicia sesion, da click aqui para iniciar</a></p>
+                          <p><a href="/Login" class="link-prof">Para ver tú perfil primero inicia sesión, toca aquí para iniciar.</a></p>
                       <% } %>
                   </div>                    
               </li>    
@@ -99,7 +104,7 @@
                 <img src="/Public/img/Salon4.jpg" alt="">
                 <div class="text-carousel">
                     <p class="text-t">SALÓN RESPLANDOR</p>
-                    <p class="text-c">El Salón Resplandor es un espacio diseñado para deslumbrar. Con una iluminación suave que resalta cada detalle, este salón cerrado es ideal para celebraciones íntimas y elegantes. Sus techos altos y acabados en tonos dorados crean un ambiente cálido y sofisticado, perfecto para bodas, cenas de gala y eventos especiales.</p>
+                    <p class="text-c">El Salón Resplandor es un espacio diseñado para deslumbrar. Con una iluminación suave que resalta cada detalle, este salón cerrado es ideal para celebraciones íntimas y elegantes.</p>
                     <button class="btn-c">MÁS INFORMACIÓN</button>
                 </div>
               </li>

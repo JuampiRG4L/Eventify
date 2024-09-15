@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
       pagination: false,
       cover: true,
       breakpoints: {
-        600: {
-          fixedWidth: 66,
-          fixedHeight: 40,
+        768: {
+          fixedWidth: 100,
+          fixedHeight: 100,
         },
       },
     }).mount();
