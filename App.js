@@ -72,6 +72,24 @@ app.get('/login', (req, res) => {
   res.render('Login');
 });
 
+// Ruta para redirigir a Google para la autenticación
+app.get('/auth/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}));
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    // Lógica para redirigir según el rol del usuario
+    if (req.user.rol === 'admin') {
+      // Si es administrador, redirigir al dashboard
+      res.redirect('/admin/dashboard');
+    } else {
+      // Si es un usuario normal, redirigir al index o página principal
+      res.redirect('/index');
+    }
+});
+=======
 // app.get('/auth/google', passport.Authenticator ('google', {
 //   scope:['profile', 'email']
 // }));
@@ -103,6 +121,12 @@ app.get('/admin/edit-room', auth.ensureAdmin, (req, res) => {
   res.render('Admin/editRoom');  // Redirige a la página para editar salones
 });
 
+app.get('/admin/dashboard', auth.ensureAdmin, (req,res) =>{
+  res.render('Admin/dashboard');
+})
+
+
+=======
 //DEJAR ESTO QUIETO
 // app.get('/reservation', auth.ensureAdmin, (req, res) => {
 //   res.render('User/reservation');

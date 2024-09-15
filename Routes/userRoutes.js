@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   res.render('User/index');
 });
 
-router.get('/reservation', ensureAdmin, (req, res) => {
+router.get('/reservation', (req, res) => {
   res.render('User/reservation');
 });
 
