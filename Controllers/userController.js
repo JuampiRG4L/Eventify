@@ -84,6 +84,12 @@ async function loginUsuario(req, res) {
     }
 }
 
+exports.payments = (req, res) => {
+    const { id, name, price, capacidad } = req.query;
+    // Aquí puedes agregar la lógica para calcular el total si es necesario
+    res.render('user/payments', { id, name, price, capacidad });
+};
+
 module.exports = {
     registrarUsuario,
     loginUsuario

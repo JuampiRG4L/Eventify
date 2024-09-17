@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../Controllers/authController');
+const salonController = require('../Controllers/salonController');
 const { isAuthenticated, ensureAdmin } = require('../Middleware/auth');
 
 // Rutas
@@ -23,6 +24,7 @@ router.post('/login', authController.iniciarSesion);
 router.get('/perfil', isAuthenticated, (req, res) => {
   res.json({ message: 'Perfil del usuario', user: req.user });
 });
+
 
 router.get('/halls', (req, res) => {
   res.render('User/halls');

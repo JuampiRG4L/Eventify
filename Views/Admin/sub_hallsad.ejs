@@ -4,167 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Salón</title>
-    <style>
-      * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-  }
-
-  .container {
-      display: flex;
-      flex-direction: column;
-      padding: 0 5%;
-  }
-
-  .title {
-      margin: 10px 0;
-  }
-
-  .content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-
-  .imagen {
-      width: 60%;
-  }
-
-  .img {
-      max-width: 100%;
-      border-radius: 10px;
-  }
-
-  .info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      width: 40%;
-  }
-
-  .info-p {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      border: 2px solid rgb(221, 221, 221);;
-      box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-      padding: 20px;
-      border-radius: 10px;
-  }
-
-  .text {
-      margin: 10px;
-  }
-
-  /* Animación para el Botón */
-
-  .btn {
-      position: relative;
-      border-left: 3px ridge #5ac3f2;
-      border-right: 3px ridge #5ac3f2;
-      outline: none;
-      background-color: transparent;
-      transition: 2s;
-      border-radius: 0.3em;
-      cursor: pointer;
-      margin: auto;
-      margin-top: 10px;
-      padding: 10px;
-      border-top: transparent;
-      border-bottom: transparent;
-      font-family: "Magra", sans-serif;
-      font-weight: 700;
-      font-style: normal;
-      font-size: 16px;
-  }
-
-  .btn:hover {
-      box-shadow: inset 0px 0px 25px #5ac3f2;
-      border-top: 3px ridge #5ac3f2;
-      border-bottom: 3px ridge #5ac3f2;
-      border-radius: 10px;
-  }
-
-  .link {
-      text-decoration: none;
-      font-family: "Magra", sans-serif;
-      font-weight: 700;
-      font-style: normal;
-      color: white;
-      position: relative;
-      transition: color 0.3s ease-in-out;
-  }
-    
-  .link::before {
-      content: "";
-      position: absolute;
-      top: 100%;
-      width: 100%;
-      height: 3px;
-      background-color: var( white);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-  }
-    
-  .link:hover {
-      color: var( white);
-  }
-    
-  .link:hover::before {
-      transform: scaleX(1);
-  }
-
-  /* Estilos Textos */
-
-  .container_text {
-      display: flex;
-      align-items: space-between;
-      justify-content: center;
-      flex-direction: column;
-      margin-top: 20px;
-  }
-
-  .title_text_sub {
-      font-size: 30px;
-      margin-left: 6.5%;
-  }
-
-  .text_sub_h {
-      display: flex;
-      width: 54%;
-      margin-left: 5%;
-  }
-
-  .text_sub {
-      padding: 10px;
-  }
-
-  .text_alb {
-      font-size: 20px;
-      margin: 10px;
-      padding: 10px;
-      text-align: justify;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-  }
-
-  .img_text_sub {
-      margin-right: 10px;
-  }
-
-  #map {
-      margin-top: 20px; /* Espacio entre el botón y el mapa */
-      height: 400px;    /* Altura del mapa */
-      width: 100%;      /* Ancho del mapa */
-  }
-
-
-
-    </style>
   </head>
   <body>
     <h1>Detalles del Salón</h1>
@@ -181,6 +20,17 @@
                 <p class="text"><%= salon.name %></p>
                 <p class="text">$<%= salon.price %> COP NOCHE</p>
                 <p class="text">CAPACIDAD: <%= salon.capacidad %> PERSONAS</p>
+                
+                <form action="/user/payments" method="POST">
+                  <input type="hidden" name="id" value="<%= salon.id %>">
+                  <input type="hidden" name="name" value="<%= salon.name %>">
+                  <input type="hidden" name="capacidad" value="<%= salon.capacidad %>">
+                  <input type="hidden" name="price" value="<%= salon.price %>">
+                  <input type="hidden" name="image" value="<%= salon.image %>">
+                  <button type="submit">Alquilar Este Salón</button>
+              </form>
+              
+  
               </div>
             </div>
             <h3>Características Disponibles:</h3>
@@ -224,4 +74,4 @@
     <% } %>
     <button onclick="location.href='/admin/hallsad'" class="btn">Volver a la lista</button>
   </body>
-  </html>
+  

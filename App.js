@@ -134,6 +134,29 @@ app.get('/user/reservation', (req, res) => {
   res.render('User/reservation');
 });
 
+// Manejar tanto GET como POST para /user/payments
+app.route('/user/payments')
+  .get((req, res) => {
+    const { id, name, price, capacidad } = req.query;
+
+    if (id && name && price && capacidad) {
+      res.render('User/payments', { id, name, price, capacidad });
+    } else {
+      res.redirect('/user/halls');
+    }
+  })
+  .post((req, res) => {
+    const { id, name, price, capacidad } = req.body;
+
+    if (id && name && price && capacidad) {
+      res.render('User/payments', { id, name, price, capacidad });
+    } else {
+      res.redirect('/user/halls');
+    }
+  });
+
+
+
 // Ejemplo de ruta para perfil, debería usar userController si es necesario
 // app.get('/perfil', auth.isAuthenticated, (req, res) => {
 //   res.json({ message: 'Perfil del usuario', user: req.user });

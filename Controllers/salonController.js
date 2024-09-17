@@ -215,3 +215,7 @@ exports.deleteSalon = (req, res) => {
     res.redirect('/admin/hallsad');
   });
 };
+
+
+
+
