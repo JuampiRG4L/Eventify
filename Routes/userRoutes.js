@@ -25,6 +25,9 @@ router.get('/perfil', isAuthenticated, (req, res) => {
   res.json({ message: 'Perfil del usuario', user: req.user });
 });
 
+router.get('/halls', salonController.getAllSalons);
+
+router.get('/sub_halls/:id', salonController.getSalonDetailsUser);
 
 router.get('/halls', (req, res) => {
   res.render('User/halls');

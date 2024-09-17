@@ -63,20 +63,28 @@ exports.addSalon = (req, res) => {
   });
 };
 
-exports.getAllSalons = (req, res) => {
+exports.getAllSalons = async (req, res) => {
+  try {
+    const [rows] = await req.db.query('SELECT * FROM salones');
+    res.render('User/halls', { salons: rows }); // Asegúrate de pasar la variable salons
+  } catch (err) {
+    console.error('Error al obtener los salones:', err);
+    res.status(500).send('Error al obtener los salones.');
+  }
+};
+
+exports.getAllSalonsAdmin = (req, res) => {
   const query = 'SELECT * FROM salones';
   db.query(query, (err, results) => {
     if (err) {
       return res.status(500).send('Error al obtener los salones.');
     }
 
-    if (results.length === 0) {
-      return res.render('admin/hallsad', { salons: null });
-    }
-
+    // Renderiza la vista de administración con los salones
     res.render('admin/hallsad', { salons: results });
   });
 };
+
 
 exports.getSalonDetails = (req, res) => {
   const salonId = req.params.id;
@@ -95,6 +103,25 @@ exports.getSalonDetails = (req, res) => {
     res.render('admin/sub_hallsad', { salon: results[0] });
   });
 };
+
+exports.getSalonDetailsUser = (req, res) => {
+  const salonId = req.params.id;
+  const query = 'SELECT * FROM salones WHERE id = ?';
+
+  db.query(query, [salonId], (err, results) => {
+    if (err) {
+      console.error('Error al obtener los detalles del salón:', err);
+      return res.status(500).send('Error al obtener los detalles del salón.');
+    }
+    if (results.length === 0) {
+      console.log(`No se encontró el salón con ID: ${salonId}`);
+      return res.status(404).send('Salón no encontrado.');
+    }
+
+    res.render('User/sub_halls', { salon: results[0] });
+  });
+};
+
 
 exports.getSalonForEdit = (req, res) => {
   const salonId = req.params.id;

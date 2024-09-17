@@ -16,7 +16,7 @@ router.get('/add-room', (req, res) => {
 router.post('/add-room', salonController.addSalon);
 
 // Ruta para mostrar la lista de salones
-router.get('/hallsad', salonController.getAllSalons);
+router.get('/hallsad', salonController.getAllSalonsAdmin);
 
 // Ruta para mostrar los detalles de un salón
 router.get('/sub_hallsad/:id', salonController.getSalonDetails);

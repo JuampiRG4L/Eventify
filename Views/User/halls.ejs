@@ -18,14 +18,14 @@
     </div>
     <header id="menu">
         <nav class="nav">
-          <div class="menu-toggle" id="menu-toggle">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
             <ul class="list" id="enlaces">
                 <li class="item">
-                  <a href="/index" class="link">EVENTIFY</a>
+                    <a href="/index" class="link">EVENTIFY</a>
                 </li>
                 <li class="item">
                     <a href="/index" class="link">INICIO</a>
@@ -42,24 +42,33 @@
             </ul>
         </nav>
     </header>
-    <div class="container"> 
-        <div class="card">
-            <div class="card2">
-                <div class="content">
-                    <div class="imagen">
-                        <img src="/Public/img/Salon2.jpg" alt="" class="img">
-                    </div>
-                    <div class="info">
-                        <p class="text">BELLO, ANTIOQUIA</p>
-                        <p class="text">SALÓN AURORA</p>
-                        <p class="text">$200.000 COP NOCHE</p>
-                        <p class="text">CAPACIDAD: 100 PERSONAS</p>
-                        <button id="verInfo" class="btn">MÁS INFORMACIÓN</button>
+
+    <% if (!salons || salons.length === 0) { %>
+        <p>No hay salones disponibles</p>
+    <% } else { %>
+        <div class="container">
+            <% salons.forEach((salon) => { %>
+                <div class="card">
+                    <div class="card2">
+                        <div class="content">
+                            <div class="imagen">
+                                <img src="/uploads/<%= salon.image %>" alt="Imagen del salón" class="img">
+                            </div>
+                            <div class="info">
+                                <p class="text"><%= salon.address %></p>
+                                <p class="text"><%= salon.name %></p>
+                                <p class="text">$<%= salon.price %> COP NOCHE</p>
+                                <p class="text">CAPACIDAD: <%= salon.capacidad %> PERSONAS</p>
+                                <button onclick="location.href='/user/sub_halls/<%= salon.id %>'" class="btn">MÁS INFORMACIÓN</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <% }); %>
         </div>
-    </div>
+    <% } %>
+    
+
     <footer>
         <div class="content-f">
             <img src="/Public/img/Imagen_f.jpeg" alt="" class="img-l">
@@ -90,8 +99,9 @@
             <p class="text-fd">Copyright © 2024 Eventify Colombia - Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script src="/Public/Js/loading_screen.js"></script>
+    <script src="/Public/Js/buttons.js"></script>
+    <script src="/Public/Js/header.js"></script>
 </body>
-<script src="/Public/Js/loading_screen.js"></script>
-<script src="/Public/Js/buttons.js"></script>
-<script src="/Public/Js/header.js"></script>
 </html>
