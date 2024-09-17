@@ -89,7 +89,7 @@ app.get('/auth/google/callback',
       res.redirect('/index');
     }
 });
-=======
+
 // app.get('/auth/google', passport.Authenticator ('google', {
 //   scope:['profile', 'email']
 // }));
@@ -125,13 +125,10 @@ app.get('/admin/dashboard', auth.ensureAdmin, (req,res) =>{
   res.render('Admin/dashboard');
 })
 
-
-=======
 //DEJAR ESTO QUIETO
 // app.get('/reservation', auth.ensureAdmin, (req, res) => {
 //   res.render('User/reservation');
 // });
-
 
 app.get('/user/reservation', (req, res) => {
   res.render('User/reservation');
