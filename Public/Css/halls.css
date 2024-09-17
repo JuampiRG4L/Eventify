@@ -108,6 +108,12 @@
         width: 45%;
     }
 }
+
+@media (max-width: 360px) {
+    .card {
+        width: 90%;
+    }
+}
    
 .card2 {
     transition: all .2s;

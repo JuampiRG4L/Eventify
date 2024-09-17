@@ -8,6 +8,12 @@
     background-color: #f5e6f6;
 }
 
+@media (max-width: 360px) {
+    .title-major {
+        font-size: 28px;
+    }
+}
+
 .carousel-s {
     position: relative;
     overflow: hidden;
@@ -34,6 +40,13 @@
     }
 }
 
+@media (max-width: 360px) {
+    .carousel-m {
+        bottom: 4%;
+        left: 35%;
+    }
+}
+
 .carousel {
     border-radius: 10px;
 }
@@ -54,6 +67,14 @@
     }
 }
 
+@media (max-width: 360px) {
+    .text-carousel {
+        bottom: 35%;
+        width: 90%;
+        left: 3%;
+    }
+}
+
 .text-t {
     font-size: 40px;
     font-family: "Kaushan Script", cursive;
@@ -64,6 +85,12 @@
 @media (max-width: 768px) {
     .text-t {
         font-size: 30px;
+    }
+}
+
+@media (max-width: 360px) {
+    .text-t {
+        font-size: 16px;
     }
 }
 
@@ -82,38 +109,9 @@
     }
 }
 
-.btn-c {
-    position: relative;
-    border-left: 3px ridge #5ac3f2;
-    border-right: 3px ridge #5ac3f2;
-    outline: none;
-    background-color: transparent;
-    transition: 2s;
-    border-radius: 0.3em;
-    cursor: pointer;
-    margin: auto;
-    margin-top: 10px;
-    padding: 10px;
-    border-top: transparent;
-    border-bottom: transparent;
-    font-family: "Magra", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 16px;
-    color: white;
-    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.9);
-}
-
-.btn-c:hover {
-    box-shadow: inset 0px 0px 25px #5ac3f2;
-    border-top: 3px ridge #5ac3f2;
-    border-bottom: 3px ridge #5ac3f2;
-    border-radius: 10px;
-}
-
-@media (max-width: 768px) {
-    .btn-c {
-        padding: 8px;
-        font-size: 15px;
+@media (max-width: 360px) {
+    .text-c {
+        font-size: 12px;
+        margin: 2px 0;
     }
 }
