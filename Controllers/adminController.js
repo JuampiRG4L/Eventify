@@ -1,6 +1,6 @@
 // Controllers/adminController.js
 
-const Usuario = require('../Models/User'); 
+const Usuario = require('../Models/User');
 const Admin  = require('../Models/Admin');
 
 // Promover un usuario a administrador
@@ -57,7 +57,34 @@ async function promoverAAdmin(req, res) {
     }
 }
 
-module.exports = {
-    promoverAAdmin
-};
+const updateProfile = async (req, res) => {
+    const { nombre, correo } = req.body;
+    try {
+      const admin = await req.db.query('UPDATE Administradores SET nombre = ?, correo = ? WHERE id = ?', [nombre, correo, req.user.id]);
+      req.user.nombre = nombre;
+      req.user.correo = correo;
+      res.redirect('/admin/perfil');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al actualizar el perfil');
+    }
+  };
 
+  // Eliminar perfil de administrador
+ const deleteProfile = async (req, res) => {
+    try {
+      await req.db.query('DELETE FROM Administradores WHERE id = ?', [req.user.id]);
+      req.logout();
+      res.redirect('/');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al eliminar el perfil');
+    }
+  };
+
+
+module.exports = {
+    promoverAAdmin,
+    updateProfile,
+    deleteProfile
+};
