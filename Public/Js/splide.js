@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
           fixedWidth: 100,
           fixedHeight: 100,
         },
+        360: {
+          fixedWidth: 50,
+          fixedHeight: 50,
+        }
       },
     }).mount();
   
