@@ -13,7 +13,7 @@ function isAuthenticated(req, res, next) {
     console.log('Usuario autenticado:', decoded);
     next();
   } catch (error) {
-    console.log('Token inválido o expirado:', error);
+    console.log('Token inválido o expirado:', error); 
     res.status(401).json({ message: 'Token inválido o expirado.' });
   }
 }

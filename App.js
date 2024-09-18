@@ -5,6 +5,10 @@ const mysql = require('mysql2/promise');
 const passport = require('passport');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
+const auth = require('./Middleware/auth');
+const authRoutes = require('./Routes/authRoutes');
+const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
+const userRoutes = require('./Routes/userRoutes')
 const path = require('path');
 require('./config/db');
 
@@ -25,6 +29,8 @@ app.use(fileUpload());
 app.use('/uploads', express.static('public/uploads'));
 app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
+app.set('view cache', false);
+
 
 // Configuración para servir archivos estáticos
 app.use('/Public', express.static(path.join(__dirname, '/Public')));
@@ -47,108 +53,25 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rutas
-const authRoutes = require('./Routes/authRoutes');
-app.use('/', authRoutes);
-console.log('Rutas de autenticación cargadas');
-
-const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
+app.use('/', userRoutes)
 app.use('/admin', adminRoutes);
-
-// Rutas de vistas
-app.get('/', (req, res) => {
-  res.render('User/index'); // Renderizar vista principal de usuario
-});
-
-app.get('/index', (req, res) => {
-  res.render('User/index');
-});
-
-app.get('/sub_halls', (req, res) => {
-  res.render('User/sub_halls');
-});
+app.use('/user', userRoutes);
+app.use( authRoutes )
 
 app.get('/login', (req, res) => {
   res.render('Login');
 });
 
-// Ruta para redirigir a Google para la autenticación
-app.get('/auth/google', passport.authenticate('google', {
-  scope: ['profile', 'email']
-}));
-
-app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
-  (req, res) => {
-    // Lógica para redirigir según el rol del usuario
-    if (req.user.rol === 'admin') {
-      // Si es administrador, redirigir al dashboard
-      res.redirect('/admin/dashboard');
-    } else {
-      // Si es un usuario normal, redirigir al index o página principal
-      res.redirect('/index');
-    }
-});
-=======
-// app.get('/auth/google', passport.Authenticator ('google', {
-//   scope:['profile', 'email']
-// }));
-
-app.get('/reset-password', (req, res) => {
-  res.render('RestablecimientoContraseña');
-});
-
-app.get('/user/payments', (req, res) => {
-  res.render('User/payments');
-});
 
 // Manejo de errores y puerto
 // app.use((req, res, next) => {
 //   res.status(404).send('Página no encontrada');
 // });
 
-// Rutas para administradores
-const auth = require('./Middleware/auth')
-app.get('/admin/dashboard', auth.ensureAdmin, (req, res) => {
-  res.render('Admin/dashboard');  // Redirige al dashboard de admin
-});
-
-app.get('/admin/add-room', auth.ensureAdmin, (req, res) => {
-  res.render('Admin/addRoom');  // Redirige a la página para agregar salones
-});
-
-app.get('/admin/edit-room', auth.ensureAdmin, (req, res) => {
-  res.render('Admin/editRoom');  // Redirige a la página para editar salones
-});
-
-app.get('/admin/dashboard', auth.ensureAdmin, (req,res) =>{
-  res.render('Admin/dashboard');
-})
-
-
-=======
-//DEJAR ESTO QUIETO
-// app.get('/reservation', auth.ensureAdmin, (req, res) => {
-//   res.render('User/reservation');
-// });
-
-
-app.get('/user/reservation', (req, res) => {
-  res.render('User/reservation');
-});
-
-// Ejemplo de ruta para perfil, debería usar userController si es necesario
-// app.get('/perfil', auth.isAuthenticated, (req, res) => {
-//   res.json({ message: 'Perfil del usuario', user: req.user });
-// });
-
 app.get('/perfil', (req, res) => {
   res.json({ message: 'Perfil del usuario'});
 });
 
-app.get('/user/halls', (req, res) => {
-  res.render('User/halls');  // Asegúrate de que la vista exista en la carpeta correcta
-});
 
 // Puerto
 const PORT = process.env.PORT || 3000;
@@ -158,4 +81,3 @@ app.listen(PORT, () => {
 
 // Passport configuration
 require('./Passport/passport-setup');
-require('./Passport/passport-setupFacebook');

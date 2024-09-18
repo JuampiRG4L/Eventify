@@ -84,7 +84,51 @@ async function loginUsuario(req, res) {
     }
 }
 
+async function getProfile(req, res) {
+    try {
+        if (!req.User) {
+            console.log('Usuario no autenticado. Redirigiendo a login.');
+            return res.redirect('/login');
+        }
+
+        console.log('Usuario autenticado:', req.User);
+        res.render('User/profile', { user: req.User });
+    } catch (error) {
+        console.error('Error al cargar el perfil:', error);
+        res.status(500).send('Error al cargar el perfil');
+    }
+}
+
+async function updateProfile (req, res) {
+    const { nombre, correo } = req.body;
+    try {
+      const User = await req.db.query('UPDATE Usuarios SET nombre = ?, correo = ? WHERE id = ?', [nombre, correo, req.User.id]);
+      req.User.nombre = nombre;
+      req.User.correo = correo;
+      res.redirect('/perfil');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al actualizar el perfil');
+    }
+  };
+
+  // Eliminar perfil de usuario
+  async function deleteProfile (req, res) {
+    try {
+      await req.db.query('DELETE FROM Usuarios WHERE id = ?', [req.user.id]);
+      req.logout();
+      res.redirect('/');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al eliminar el perfil');
+    }
+  };
+
+
 module.exports = {
     registrarUsuario,
-    loginUsuario
+    loginUsuario,
+    getProfile,
+    updateProfile,
+    deleteProfile
 };

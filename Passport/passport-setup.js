@@ -60,17 +60,17 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    // Buscar el usuario por su ID en la base de datos
+    // Buscar al usuario por su ID en la tabla de usuarios
     const [rows] = await db.query('SELECT * FROM Usuarios WHERE id = ?', [id]);
 
     if (rows.length) {
       const user = rows[0];
 
-      // Verificar si el usuario es administrador
+      // Verificar si también es un administrador
       const [adminRows] = await db.query('SELECT * FROM Administradores WHERE correo = ?', [user.correo]);
-      user.isAdmin = adminRows.length > 0;
+      user.isAdmin = adminRows.length > 0; // Agrega el campo isAdmin para identificar administradores
 
-      done(null, user);
+      done(null, user); // Ahora user tendrá isAdmin como parte del objeto
     } else {
       done(new Error('Usuario no encontrado'));
     }
