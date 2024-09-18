@@ -172,6 +172,8 @@
 
 .content-text {
     display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
 }
 
@@ -187,7 +189,7 @@
 
 .title_text_sub {
     font-size: 30px;
-    margin-left: 3%;
+    text-align: center;
 }
 
 @media (max-width: 768px) {

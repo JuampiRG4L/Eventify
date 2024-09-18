@@ -263,8 +263,8 @@ header {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     z-index: 1;
     display: none; /* Oculta el menú inicialmente */
-    margin-right: 30px;
-    bottom: -230px;
+    margin-right: 35px;
+    bottom: -190px;
     padding: 10px;
     width: 16%;
     text-align: justify;
@@ -281,7 +281,7 @@ header {
 
 @media (max-width: 360px) {
     #perfilMenu {
-        margin-right: 4px;
+        margin-right: 6px;
         padding: 2px;
         width: auto;
         bottom: -90px;
