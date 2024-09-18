@@ -7,24 +7,20 @@
 .container {
     display: flex;
     flex-direction: column;
-    padding: 0 5%;
-}
-
-.title {
-    margin: 10px 0;
-}
-
-@media (max-width: 360px) {
-    .title {
-        text-align: center;
-        font-size: 25px;
-    }
+    padding: 0 3%;
 }
 
 .content {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 360px) {
@@ -33,13 +29,20 @@
     }
 }
 
+.text_sbn {
+    font-family: "M PLUS 1 Code", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 30px;
+}
+
 .imagen {
     width: 60%;
 }
 
 @media (max-width: 768px) {
     .imagen {
-        padding-right: 10px;
+        width: auto;
     }
 }
 
@@ -53,6 +56,7 @@
 .img {
     max-width: 100%;
     border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 
 .info {
@@ -60,7 +64,18 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-left: 2%;
+    padding: 30px;
     width: 40%;
+    border: 2px solid rgb(221, 221, 221);;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .info {
+        width: auto;
+    }
 }
 
 @media (max-width: 360px) {
@@ -70,24 +85,55 @@
     }
 }
 
-.info-p {
+.text {
+    margin: 10px;
+    font-size: 18px;
+}
+
+.fecha {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 2%;
+    width: 30%;
+}
+
+@media (max-width: 768px) {
+    .fecha {
+        width: auto;
+    }
+}
+
+.form_h {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
+    padding: 20px;
     border: 2px solid rgb(221, 221, 221);;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-    padding: 20px;
     border-radius: 10px;
 }
 
-.text {
-    margin: 10px;
+@media (max-width: 768px) {
+    .form_h {
+        margin-top: 20px;
+    }
 }
 
-/* Animación para el Botón */
+.label_h {
+    font-size: 20px;
+    margin: 10px 0;
+}
 
-.btn {
+.input_h{
+    padding: 4px;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn_sh {
     position: relative;
     border-left: 3px ridge #5ac3f2;
     border-right: 3px ridge #5ac3f2;
@@ -107,40 +153,11 @@
     font-size: 16px;
 }
 
-.btn:hover {
+.btn_sh:hover {
     box-shadow: inset 0px 0px 25px #5ac3f2;
     border-top: 3px ridge #5ac3f2;
     border-bottom: 3px ridge #5ac3f2;
     border-radius: 10px;
-}
-
-.link {
-    text-decoration: none;
-    font-family: "Magra", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    color: white;
-    position: relative;
-    transition: color 0.3s ease-in-out;
-}
-  
-.link::before {
-    content: "";
-    position: absolute;
-    top: 100%;
-    width: 100%;
-    height: 3px;
-    background-color: var( white);
-    transform: scaleX(0);
-    transition: transform 0.3s;
-}
-  
-.link:hover {
-    color: var( white);
-}
-  
-.link:hover::before {
-    transform: scaleX(1);
 }
 
 /* Estilos Textos */
@@ -164,6 +181,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        margin-top: -20px;
     }
 }
 
@@ -185,26 +203,20 @@
     }
 }
 
-.text_sub_h {
-    display: flex;
-    width: 45%;
-    padding-right: 6px;
+.text_sub {
+    padding: 10px;
 }
 
 @media (max-width: 768px) {
-    .text_sub_h {
-        width: 100% !important;
+    .text_sub {
+        margin-bottom: -30px;
     }
 }
 
 @media (max-width: 360px) {
-    .text_sub_h {
-        flex-direction: column;
+    .text_sub {
+        margin-bottom: -30px;
     }
-}
-
-.text_sub {
-    padding: 10px;
 }
 
 .text_alb {
@@ -212,58 +224,10 @@
     margin: 10px;
     padding: 10px;
     text-align: justify;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .img_text_sub {
     margin-right: 10px;
-}
-
-.map_sub {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 55%;
-    padding: 20px;
-}
-
-@media (max-width: 768px) {
-    .map_sub {
-        width: 600px !important;
-    }
-}
-
-@media (max-width: 360px) {
-    .map_sub {
-        width: 300px !important;
-    }
-}
-
-.map {
-    height: 100%;
-    width: 100%;
-    z-index: 0;
-    border-radius: 20px;
-}
-
-@media (max-width: 768px) {
-    .map {
-        height: 500px;
-    }
-}
-
-@media (max-width: 360px) {
-    .map {
-        height: 250px;
-    }
-}
-
-.leaflet-control-zoom {
-    display: none;
-}
-
-.leaflet-control-attribution {
-    display: none;
 }
