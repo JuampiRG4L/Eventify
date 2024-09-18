@@ -20,19 +20,47 @@
               <p class="text"><%= salon.name %></p>
               <p class="text">$<%= salon.price %> COP NOCHE</p>
               <p class="text">CAPACIDAD: <%= salon.capacidad %> PERSONAS</p>
-              
-              <form action="/user/payments" method="POST">
-                <input type="hidden" name="id" value="<%= salon.id %>">
-                <input type="hidden" name="name" value="<%= salon.name %>">
-                <input type="hidden" name="capacidad" value="<%= salon.capacidad %>">
-                <input type="hidden" name="price" value="<%= salon.price %>">
-                <input type="hidden" name="image" value="<%= salon.image %>">
-                <button type="submit">Alquilar Este Salón</button>
-            </form>
-            
-
             </div>
-          </div>
+            <form id="paymentForm" action="/user/payments" method="POST">
+              <input type="hidden" name="id" value="<%= salon.id %>">
+              <input type="hidden" name="name" value="<%= salon.name %>">
+              <input type="hidden" name="capacidad" value="<%= salon.capacidad %>">
+              <input type="hidden" name="price" value="<%= salon.price %>">
+              <input type="hidden" name="image" value="<%= salon.image %>">
+            
+              <!-- Campos para seleccionar fecha y hora -->
+              <label for="fecha">Seleccione la fecha:</label>
+              <input type="date" id="fecha" name="fecha" required>
+            
+              <label for="horaInicio">Seleccione la hora de inicio:</label>
+              <select id="horaInicio" name="horaInicio" required>
+                <% 
+                  // Generar las opciones de hora desde las 10 a.m. hasta las 3 a.m.
+                  let horas = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00'];
+                  horas.forEach(function(hora) { 
+                %>
+                  <option value="<%= hora %>"><%= hora %></option>
+                <% }); %>
+              </select>
+            
+              <label for="horaFin">Seleccione la hora de fin:</label>
+              <select id="horaFin" name="horaFin" required>
+                <% 
+                  // Generar las opciones de hora desde las 10 a.m. hasta las 3 a.m.
+                  horas.forEach(function(hora) { 
+                %>
+                  <option value="<%= hora %>"><%= hora %></option>
+                <% }); %>
+              </select>
+            
+              <div id="error-message" style="color: red; display: none;">
+                La reserva debe durar al menos 4 horas.
+              </div>
+            
+              <button type="submit">Alquilar Este Salón</button>
+            </form>
+              
+          <!-- Características Disponibles -->
           <h3>Características Disponibles:</h3>
           <ul>
             <% if (salon.cocina) { %>
@@ -104,3 +132,5 @@
   <% } %>
   <button onclick="location.href='/admin/hallsad'" class="btn">Volver a la lista</button>
 </body>
+<script src="/Public/Js/dispo.js"></script>
+</html>

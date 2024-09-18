@@ -140,25 +140,22 @@ app.get('/user/reservation', (req, res) => {
 });
 
 // Manejar tanto GET como POST para /user/payments
-app.route('/user/payments')
-  .get((req, res) => {
-    const { id, name, price, capacidad } = req.query;
-
-    if (id && name && price && capacidad) {
-      res.render('User/payments', { id, name, price, capacidad });
-    } else {
-      res.redirect('/user/halls');
-    }
-  })
-  .post((req, res) => {
-    const { id, name, price, capacidad } = req.body;
-
-    if (id && name && price && capacidad) {
-      res.render('User/payments', { id, name, price, capacidad });
-    } else {
-      res.redirect('/user/halls');
-    }
+app.post('/user/payments', (req, res) => {
+  const { id, name, capacidad, price, image, fecha, horaInicio, horaFin } = req.body;
+  
+  // Renderizar la vista de pagos y pasar los datos necesarios
+  res.render('User/payments', { // Especifica la carpeta 'User'
+    id, 
+    name, 
+    capacidad, 
+    price, 
+    image, 
+    fecha, 
+    horaInicio, 
+    horaFin 
   });
+});
+
 
 
 

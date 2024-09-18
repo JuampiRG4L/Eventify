@@ -44,13 +44,15 @@
     </header>
     <div class="payment-container">
         <h2>Confirmar y Pagar</h2>
-        <div id="payment-info">
-            <!-- Aquí se mostrará la información del salón -->
-            <div class="salon-details">
-                <h3>Nombre del Salón: <%= name %></h3>
-                <p>Precio por noche: $<%= price %> COP</p>
-                <p>Capacidad: <%= capacidad %> personas</p>
-            </div>            
+        <div class="salon-details">
+            <h3>Nombre del Salón: <%= name %></h3>
+            <p>Precio por noche: $<%= price %> COP</p>
+            <p>Capacidad: <%= capacidad %> personas</p>
+            <p>Fecha de reserva: <%= fecha %></p>
+            <p>Hora de inicio: <%= horaInicio %></p>
+            <p>Hora de fin: <%= horaFin %></p>
+          </div>
+                   
         </div>
         <div class="total">
             <p>Total a pagar: $<span id="total-amount"><%= price %></span></p>
