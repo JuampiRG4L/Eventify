@@ -57,6 +57,12 @@ span {
   margin-top: 20px;
 }
 
+@media (max-width: 360px) {
+  span {
+    margin-top: 0;
+  }
+}
+
 a {
   color: #333;
   font-size: 14px;
@@ -109,6 +115,12 @@ button {
   text-transform: capitalize;
   transition: 0.3s ease-in-out;
   cursor: pointer;
+}
+
+@media (max-width: 360px) {
+  button {
+    padding: 10px 60px;
+  }
 }
 
 button:hover {
@@ -165,6 +177,12 @@ form {
   text-align: center;
 }
 
+@media (max-width: 360px) {
+  form {
+    border-radius: 10px;
+  }
+}
+
 input {
   background-color: #fff;
   outline: none;
@@ -194,11 +212,30 @@ input {
   }
 }
 
+@media (max-width: 360px) {
+  .container {
+    width: 93%!important;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 15px!important;
+    background-color: transparent;
+  }
+}
+
 .form-container {
   position: absolute;
   top: 0;
   height: 100%;
   transition: all 0.6s ease-in-out;
+}
+
+@media (max-width: 360px) {
+  .form-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transition: none;
+  }
 }
 
 .form-control {
@@ -274,6 +311,13 @@ input {
   z-index: 1;
 }
 
+@media (max-width: 360px) {
+  .login-container {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
 .container.right-panel-active .login-container {
   transform: translateX(100%);
 }
@@ -283,6 +327,14 @@ input {
   width: 50%;
   opacity: 0;
   z-index: 0;
+}
+
+@media (max-width: 360px) {
+  .register-container {
+    width: 100%;
+    opacity: 1;
+    z-index: 2;
+  }
 }
 
 .container.right-panel-active .register-container {
@@ -315,6 +367,12 @@ input {
   overflow: hidden;
   transition: transform 0.6s ease-in-out;
   z-index: 4;
+}
+
+@media (max-width: 360px) {
+  .overlay-container {
+    display: none;
+  }
 }
 
 .container.right-panel-active .overlay-container {
@@ -389,6 +447,12 @@ input {
   margin-bottom: 20px;
 }
 
+@media (max-width: 360px) {
+  .social-container {
+    margin-bottom: 10px;
+  }
+}
+
 .social-container a {
   border: 1px solid #dddddd;
   border-radius: 50%;
@@ -399,6 +463,12 @@ input {
   height: 40px;
   width: 40px;
   transition: 0.3s ease-in-out;
+}
+
+@media (max-width: 360px) {
+  .social-container a {
+    margin: 6px 0;
+  }
 }
 
 .social-container a:hover {
