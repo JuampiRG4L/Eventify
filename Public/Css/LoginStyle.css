@@ -201,13 +201,13 @@ input {
   width: 768px;
   max-width: 100%;
   min-height: 500px;
-  margin-top: 15px;
+  margin-top: 150px;
 }
 
 @media (max-width: 768px) {
   .container {
     width: 80%!important;
-    margin-bottom: 2%;
+    margin-top: 12.5%;
     z-index: 0;
   }
 }
@@ -217,7 +217,7 @@ input {
     width: 93%!important;
     height: auto;
     min-height: auto;
-    margin-bottom: 15px!important;
+    margin: 10px;
     background-color: transparent;
   }
 }
