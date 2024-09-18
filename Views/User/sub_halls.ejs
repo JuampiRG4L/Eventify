@@ -26,10 +26,10 @@
           </div>
             <ul class="list" id="enlaces">
                 <li class="item">
-                  <a href="/user/index" class="link">EVENTIFY</a>
+                  <a href="/index" class="link">EVENTIFY</a>
                 </li>
                 <li class="item">
-                    <a href="/user/index" class="link">INICIO</a>
+                    <a href="/index" class="link">INICIO</a>
                 </li>
                 <li class="item">
                     <a href="/user/halls" class="link">SALONES</a>
@@ -38,32 +38,74 @@
                     <a href="/user/reservation" class="link">RESERVAS</a>
                 </li>
                 <li class="item">
-                    <a href="/user/payments" class="link">PAGOS</a>
-                </li>
-                <li class="item">
                     <a href="/Login" class="link">INICIAR SESIÓN</a>
                 </li>
             </ul>
         </nav>
     </header>
     <div class="container">
-        <h1 class="title">SALÓN AURORA</h1>
-        <div class="content">
-            <div class="imagen">
-                <img src="/Public/img/Salon2.jpg" alt="" class="img">
-            </div>
+        <% if (!salon) { %>
+            <p>Salón no encontrado.</p>
+        <% } else { %>
+            
+            <img src="/uploads/<%= salon.image %>" alt="" class="img">
             <div class="info">
-                <div class="info-p">
-                    <p class="text">BELLO, ANTIOQUÍA</p>
-                    <p class="text">$200.000 COP NOCHE</p>
-                    <p class="text">CAPACIDAD: 100 PERSONAS</p>
-                    <button id="" class="btn">PAGAR</button>
-                </div>
+                <div class="info-p"></div>
             </div>
+            <p class="text"><%= salon.address %></p>
+            <p class="text">Precio: $<%= salon.price %> COP NOCHE</p>
+            <p class="text">Capacidad: <%= salon.capacidad %> PERSONAS</p>
+            <form action="/user/payments" method="POST">
+                <input type="hidden" name="id" value="<%= salon.id %>">
+                <input type="hidden" name="name" value="<%= salon.name %>">
+                <input type="hidden" name="capacidad" value="<%= salon.capacidad %>">
+                <input type="hidden" name="price" value="<%= salon.price %>">
+                <input type="hidden" name="image" value="<%= salon.image %>">
+                <button id="" class="btn" type="submit">Alquilar Este Salón</button>
+                </form>
+            </form>
+        <% } %>
+        <h3>Características Disponibles:</h3>
+            <ul>
+              <% if (salon.cocina) { %>
+                <li>Cocina</li>
+              <% } %>
+              <% if (salon.wifi) { %>
+                <li>WiFi</li>
+              <% } %>
+              <% if (salon.estacionamiento) { %>
+                <li>Estacionamiento</li>
+              <% } %>
+              <% if (salon.guardaObjetos) { %>
+                <li>Guarda Objetos</li>
+              <% } %>
+              <% if (salon.jardin) { %>
+                <li>Jardín</li>
+              <% } %>
+              <% if (salon.balcon) { %>
+                <li>Balcón</li>
+              <% } %>
+              <% if (salon.decoracion) { %>
+                <li>Decoración</li>
+              <% } %>
+              <% if (salon.sonido) { %>
+                <li>Sistema de Sonido</li>
+              <% } %>
+              <% if (salon.banos) { %>
+                <li>Baños</li>
+              <% } %>
+              <% if (salon.movilidad) { %>
+                <li>Accesibilidad para Movilidad Reducida</li>
+              <% } %>
+            </ul>
+          </div>
         </div>
+      </div>
+    </div>
+    </div>
     </div>
     <div class="container_text">
-        <h3 class="title_text_sub">Lo que ofrece el Salón Aurora</h3>
+        <h3 class="title_text_sub"><%= salon.name %></h3>
         <div class="content-text">
             <div class="text_sub_h">
                 <div class="text_sub">

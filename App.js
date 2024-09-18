@@ -5,10 +5,6 @@ const mysql = require('mysql2/promise');
 const passport = require('passport');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
-const auth = require('./Middleware/auth');
-const authRoutes = require('./Routes/authRoutes');
-const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
-const userRoutes = require('./Routes/userRoutes')
 const path = require('path');
 require('./config/db');
 
@@ -29,8 +25,6 @@ app.use(fileUpload());
 app.use('/uploads', express.static('public/uploads'));
 app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
-app.set('view cache', false);
-
 
 // Configuración para servir archivos estáticos
 app.use('/Public', express.static(path.join(__dirname, '/Public')));
@@ -53,10 +47,31 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', userRoutes)
+// Rutas
+const authRoutes = require('./Routes/authRoutes');
+app.use('/', authRoutes);
+console.log('Rutas de autenticación cargadas');
+
+const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
 app.use('/admin', adminRoutes);
+
+const salonController = require('./Controllers/salonController');
+
+const userRoutes = require('./Routes/userRoutes'); 
 app.use('/user', userRoutes);
-app.use( authRoutes )
+
+// Rutas de vistas
+app.get('/', (req, res) => {
+  res.render('User/index'); // Renderizar vista principal de usuario
+});
+
+app.get('/index', (req, res) => {
+  res.render('User/index');
+});
+
+app.get('/sub_halls', (req, res) => {
+  res.render('User/sub_halls');
+});
 
 app.get('/login', (req, res) => {
   res.render('Login');
@@ -90,7 +105,7 @@ app.get('/reset-password', (req, res) => {
 
 app.get('/user/payments', (req, res) => {
   res.render('User/payments');
-
+});
 
 // Manejo de errores y puerto
 // app.use((req, res, next) => {
@@ -124,6 +139,29 @@ app.get('/user/reservation', (req, res) => {
   res.render('User/reservation');
 });
 
+// Manejar tanto GET como POST para /user/payments
+app.route('/user/payments')
+  .get((req, res) => {
+    const { id, name, price, capacidad } = req.query;
+
+    if (id && name && price && capacidad) {
+      res.render('User/payments', { id, name, price, capacidad });
+    } else {
+      res.redirect('/user/halls');
+    }
+  })
+  .post((req, res) => {
+    const { id, name, price, capacidad } = req.body;
+
+    if (id && name && price && capacidad) {
+      res.render('User/payments', { id, name, price, capacidad });
+    } else {
+      res.redirect('/user/halls');
+    }
+  });
+
+
+
 // Ejemplo de ruta para perfil, debería usar userController si es necesario
 // app.get('/perfil', auth.isAuthenticated, (req, res) => {
 //   res.json({ message: 'Perfil del usuario', user: req.user });
@@ -132,6 +170,10 @@ app.get('/user/reservation', (req, res) => {
 app.get('/perfil', (req, res) => {
   res.json({ message: 'Perfil del usuario'});
 });
+
+app.get('/halls', salonController.getAllSalons);
+
+app.get('/sub_halls', salonController.getSalonDetailsUser);
 
 
 // Puerto
