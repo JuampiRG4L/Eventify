@@ -2,8 +2,13 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../Controllers/authController');
+<<<<<<< HEAD
 const userController = require('../Controllers/userController');
 const auth = require ('../Middleware/auth.js');
+=======
+const salonController = require('../Controllers/salonController');
+const reservationController = require('../Controllers/reservationController');
+>>>>>>> Pablo
 const { isAuthenticated, ensureAdmin } = require('../Middleware/auth');
 
 // Rutas
@@ -16,6 +21,7 @@ router.get('/user/index', (req, res) => {
   res.render('User/index');
 });
 
+<<<<<<< HEAD
 // ruta para los salones
 router.get('/user/halls', (req, res) => {
   res.render('User/halls');
@@ -30,6 +36,11 @@ router.get('/user/sub_halls', (req, res) => {
 router.get('/user/reservation', (req, res) => {
   res.render('User/reservation');
 });
+=======
+router.get('/reservation', reservationController.getReservas);
+
+router.post('/reservation', reservationController.createReserva);
+>>>>>>> Pablo
 
 // ruta para los pagos del usuario
 router.get('/user/payments', (req, res) => {

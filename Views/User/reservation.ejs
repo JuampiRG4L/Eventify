@@ -47,11 +47,54 @@
     <body>
         <div class="container">
             <h1>Tus Reservas</h1>
-    
             <div id="reservas-container">
-                <!-- Aquí se insertará el contenido dinámico -->
+                <% if (reservas.length > 0) { %>
+                    <ul>
+                        <% reservas.forEach(reserva => { %>
+                            <li>
+                                <h3>Evento: <%= reserva.tipo_evento %></h3>
+                                <p>Salón: <%= reserva.salon.name %></p>
+                                <p>Fecha: <%= reserva.hora_inicio.toLocaleDateString() %></p>
+                                <p>Hora: <%= reserva.hora_inicio.toLocaleTimeString() %> - <%= reserva.hora_fin.toLocaleTimeString() %></p>
+                                <p>Estado: <%= reserva.estado %></p>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>
+                    <p>No tienes reservas.</p>
+                <% } %>
             </div>
         </div>
+        <footer>
+            <div class="content-f">
+                <img src="/Public/img/Imagen_f.jpeg" alt="" class="img-l">
+                <ul class="ul-f">
+                    <li class="li-f"><a href="/index" class="link-f">Inicio</a></li>
+                    <li class="li-f"><a href="/user/halls" class="link-f">Eventos</a></li>
+                    <li class="li-f"><a href="#" class="link-f">Conócenos</a></li>
+                    <li class="li-f"><a href="#" class="link-f">Política de Privacidad</a></li>
+                    <li class="li-f"><a href="#" class="link-f">Términos y Condiciones</a></li>
+                </ul>
+                <ul class="ul-f">
+                    <li class="li-f-h"><h3 class="text-f">Contáctanos</h3></li>
+                    <li class="li-f"><p class="text-fc"><img src="/Public/img/telefono.png" alt="" class="img-i">Teléfono: +57 3012342123</p></li>
+                    <li class="li-f"><p class="text-fc"><img src="/Public/img/correo.png" alt="" class="img-i">Correo: EventifyASP@gmail.com</p></li>
+                    <li class="li-f"><p class="text-fc"><img src="/Public/img/direccion.png" alt="" class="img-i">Dirección: Calle xyz, Medellín - Colombia</p></li>
+                    <li class="li-f"><a href="#" class="link-f">Envíanos un Mensaje</a></li>
+                </ul>
+                <ul class="ul-f">
+                    <li class="li-f-h"><h3 class="text-f">Síguenos</h3></li>
+                    <li class="li-f"><a href="#" class="link-f"><img src="/Public/img/Facebook.png" alt="" class="img-i">Facebook</a></li>
+                    <li class="li-f"><a href="#" class="link-f"><img src="/Public/img/WhatsApp.png" alt="" class="img-i">WhatsApp</a></li>
+                    <li class="li-f"><a href="#" class="link-f"><img src="/Public/img/Instagram.png" alt="" class="img-i">Instagram</a></li>
+                    <li class="li-f"><a href="#" class="link-f"><img src="/Public/img/TikTok.png" alt="" class="img-i">Tik Tok</a></li>
+                    <li class="li-f"><a href="#" class="link-f"><img src="/Public/img/X.png" alt="" class="img-i">X</a></li>
+                </ul>
+            </div>
+            <div class="der">
+                <p class="text-fd">Copyright © 2024 Eventify Colombia - Todos los derechos reservados.</p>
+            </div>
+        </footer>
 </body>
 <script src="/Public/Js/loading_screen.js"></script>
 <script src="/Public/Js/reservation.js"></script>
