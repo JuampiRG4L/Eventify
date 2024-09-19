@@ -18,23 +18,26 @@
     </div>
     <header id="menu">
         <nav class="nav">
-            <div class="menu-toggle" id="menu-toggle">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
+          <div class="menu-toggle" id="menu-toggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
             <ul class="list" id="enlaces">
                 <li class="item">
-                    <a href="/index" class="link">EVENTIFY</a>
+                  <a href="/user/index" class="link">EVENTIFY</a>
                 </li>
                 <li class="item">
-                    <a href="/index" class="link">INICIO</a>
+                    <a href="/user/index" class="link">INICIO</a>
                 </li>
                 <li class="item">
                     <a href="/user/halls" class="link">SALONES</a>
                 </li>
                 <li class="item">
                     <a href="/user/reservation" class="link">RESERVAS</a>
+                </li>
+                <li class="item">
+                    <a href="/user/payments" class="link">PAGOS</a>
                 </li>
                 <li class="item">
                     <a href="/Login" class="link">INICIAR SESIÓN</a>
@@ -44,18 +47,11 @@
     </header>
     <div class="payment-container">
         <h2>Confirmar y Pagar</h2>
-        <div class="salon-details">
-            <h3>Nombre del Salón: <%= name %></h3>
-            <p>Precio por noche: $<%= price %> COP</p>
-            <p>Capacidad: <%= capacidad %> personas</p>
-            <p>Fecha de reserva: <%= fecha %></p>
-            <p>Hora de inicio: <%= horaInicio %></p>
-            <p>Hora de fin: <%= horaFin %></p>
-          </div>
-                   
+        <div id="payment-info">
+            <!-- Aquí se mostrará la información de los salones y el total -->
         </div>
         <div class="total">
-            <p>Total a pagar: $<span id="total-amount"><%= price %></span></p>
+            <p>Total a pagar: $<span id="total-amount">0</span></p>
         </div>
         <button id="confirm-payment" type="button">Confirmar y Pagar</button>
     </div>
