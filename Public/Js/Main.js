@@ -73,50 +73,50 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Inicio de sesión
-lgForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    if (!checkRequired([emailLg, passwordLg])) {
-        const correo = emailLg.value;
-        const contraseña = passwordLg.value;
+    lgForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!checkRequired([emailLg, passwordLg])) {
+            const correo = emailLg.value;
+            const contraseña = passwordLg.value;
 
-        try {
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ correo, contraseña })
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Inicio de Sesión Exitoso',
-                    text: data.message,
-                }).then(() => {
-                    // Redirige según el rol del usuario
-                    if (data.rol === 'admin') {
-                        window.location.href = '/admin/dashboard';
-                    } else {
-                        window.location.href = '/index'; // O la ruta que desees para usuarios normales
-                    }
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ correo, contraseña })
                 });
-            } else {
+
+                const data = await response.json();
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Inicio de Sesión Exitoso',
+                        text: data.message,
+                    }).then(() => {
+                        // Redirige según el rol del usuario
+                        if (data.user.rol === 'admin') {
+                            window.location.href = '/admin/dashboard'; // Redirige a la ruta del administrador
+                        } else {
+                            window.location.href = '/index'; // O la ruta que desees para usuarios normales
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message,
+                    });
+                }
+            } catch (error) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: data.message,
+                    text: 'Ocurrió un error durante el inicio de sesión.',
                 });
             }
-        } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Ocurrió un error durante el inicio de sesión.',
-            });
         }
-    }
 });
 
     // Validación de campos requeridos

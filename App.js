@@ -56,15 +56,12 @@ app.use((req, res, next) => {
 
 app.use('/', userRoutes)
 app.use('/admin', adminRoutes);
-<<<<<<< HEAD
-=======
 
 const salonController = require('./Controllers/salonController');
 
 const reservationController = require('./Controllers/reservationController')
 
 const userRoutes = require('./Routes/userRoutes'); 
->>>>>>> Pablo
 app.use('/user', userRoutes);
 app.use( authRoutes )
 
@@ -72,8 +69,18 @@ app.get('/login', (req, res) => {
   res.render('Login');
 });
 
-<<<<<<< HEAD
-=======
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/dashboard', // Esto debe cambiarse
+  failureRedirect: '/login',
+}), (req, res) => {
+  if (req.user.rol === 'admin') {
+    return res.redirect('/admin/dashboard');
+  } else {
+    return res.redirect('/user/index'); // Cambia esto según tu lógica de usuario
+  }
+});
+
+
 // Ruta para redirigir a Google para la autenticación
 app.get('/auth/google', passport.authenticate('google', {
   scope: ['profile', 'email']
@@ -85,10 +92,10 @@ app.get('/auth/google/callback',
     // Lógica para redirigir según el rol del usuario
     if (req.user.rol === 'admin') {
       // Si es administrador, redirigir al dashboard
-      res.redirect('/admin/dashboard');
+      return res.redirect('/admin/dashboard');
     } else {
       // Si es un usuario normal, redirigir al index o página principal
-      res.redirect('/index');
+      return res.redirect('/user/index');
     }
 });
 
@@ -121,7 +128,6 @@ app.get('/user/payments/:id', async (req, res) => {
       res.status(500).send('Error en el servidor');
   }
 });
->>>>>>> Pablo
 
 
 
@@ -131,8 +137,7 @@ app.get('/user/payments/:id', async (req, res) => {
 //   res.status(404).send('Página no encontrada');
 // });
 
-<<<<<<< HEAD
-=======
+
 // Rutas para administradores
 const auth = require('./Middleware/auth')
 app.get('/admin/dashboard', auth.ensureAdmin, (req, res) => {
@@ -183,7 +188,6 @@ app.post('/user/payments', (req, res) => {
 //   res.json({ message: 'Perfil del usuario', user: req.user });
 // });
 
->>>>>>> Pablo
 app.get('/perfil', (req, res) => {
   res.json({ message: 'Perfil del usuario'});
 });
