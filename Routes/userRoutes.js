@@ -2,40 +2,84 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../Controllers/authController');
+<<<<<<< HEAD
+const userController = require('../Controllers/userController');
+const auth = require ('../Middleware/auth.js');
+=======
 const salonController = require('../Controllers/salonController');
 const reservationController = require('../Controllers/reservationController');
+>>>>>>> Pablo
 const { isAuthenticated, ensureAdmin } = require('../Middleware/auth');
 
 // Rutas
 router.get('/', (req, res) => {
   res.render('User/index');
 });
-router.get('/index', (req, res) => {
+
+//ruta del index
+router.get('/user/index', (req, res) => {
   res.render('User/index');
 });
 
+<<<<<<< HEAD
+// ruta para los salones
+router.get('/user/halls', (req, res) => {
+  res.render('User/halls');
+});
+
+// ruta para la información de los salones
+router.get('/user/sub_halls', (req, res) => {
+  res.render('User/sub_halls');
+});
+
+// ruta para las reservacionee
+router.get('/user/reservation', (req, res) => {
+  res.render('User/reservation');
+});
+=======
 router.get('/reservation', reservationController.getReservas);
 
 router.post('/reservation', reservationController.createReserva);
+>>>>>>> Pablo
+
+// ruta para los pagos del usuario
+router.get('/user/payments', (req, res) => {
+  res.render('User/payments');
+});
+
+// ruta para actualizar el perfil del usuario
+router.get('/user/update-profile', (req, res)=>{
+  res.render('User/profile')
+});
+
+// ruta para eliminar el perfil del usuario
+router.get('/user/delete-profile', (req, res)=>{
+  res.render('User/profile')
+});
+
+// ruta para cambiar la contraseña del login
+router.get('/reset-password', (req, res) => {
+  res.render('RestablecimientoContraseña');
+});
+
+// ruta para obtener el perfil del usuario
+router.get('/profile', isAuthenticated, userController.getProfile);
 
 // Ruta para registro de usuario
 router.post('/register', authController.registrarUsuario);
 
 // Ruta para iniciar sesión
-router.post('/login', authController.iniciarSesion);
+// router.post('/login', authController.iniciarSesion);
 
 // Ejemplo de ruta protegida para usuarios autenticados
 router.get('/perfil', isAuthenticated, (req, res) => {
   res.json({ message: 'Perfil del usuario', user: req.user });
 });
 
-router.get('/halls', salonController.getAllSalons);
+// Metodo para actualizar el perfil de usuario
+router.post('/update-profile', userController.updateProfile);
 
-router.get('/sub_halls/:id', salonController.getSalonDetailsUser);
-
-router.get('/halls', (req, res) => {
-  res.render('User/halls');
-});
+// Metodo para Eliminar el perfil de usuario
+router.post('/delete-profile', userController.deleteProfile);
 
 module.exports = router;
-  

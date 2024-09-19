@@ -1,5 +1,4 @@
 // Controllers/adminController.js
-
 const Usuario = require('../Models/User');
 const Admin  = require('../Models/Admin');
 

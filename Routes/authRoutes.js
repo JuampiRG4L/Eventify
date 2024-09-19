@@ -6,7 +6,7 @@ const passport = require('../Passport/passport-setup'); // Asegúrate de tener c
 // Ruta para seleccionar el rol y luego redirigir a Google para la autenticación
 router.post('/auth/select-role', (req, res) => {
   // Guardar el rol seleccionado en la sesión (puede ser 'admin' o 'usuario')
-  req.session.rol = req.body.rol; 
+  req.session.rol = req.body.rol;
   // Redirigir a la ruta de autenticación de Google
   res.redirect('/auth/google');
 });
@@ -20,8 +20,7 @@ router.get('/auth/google',
 router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    // Redirigir al lugar correspondiente según el rol
-    if (req.user.isAdmin) {
+    if (req.user && req.user.rol === 'admin') {
       res.redirect('/admin/dashboard');
     } else {
       res.redirect('/user/index');
