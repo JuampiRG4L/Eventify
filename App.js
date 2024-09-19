@@ -60,7 +60,7 @@ const salonController = require('./Controllers/salonController');
 
 const reservationController = require('./Controllers/reservationController')
 
-const userRoutes = require('./Routes/userRoutes'); 
+const userRoutes = require('./Routes/userRoutes');
 app.use('/user', userRoutes);
 
 // Rutas de vistas
@@ -150,9 +150,6 @@ app.get('/admin/edit-room', auth.ensureAdmin, (req, res) => {
   res.render('Admin/editRoom');  // Redirige a la página para editar salones
 });
 
-app.get('/admin/dashboard', auth.ensureAdmin, (req,res) =>{
-  res.render('Admin/dashboard');
-})
 
 //DEJAR ESTO QUIETO
 // app.get('/reservation', auth.ensureAdmin, (req, res) => {
@@ -166,7 +163,7 @@ app.get('/user/reservation', (req, res) => {
 // Manejar tanto GET como POST para /user/payments
 app.post('/user/payments', (req, res) => {
   const { id, name, capacidad, price, image, fecha } = req.body; // Asegúrate de extraer 'id'
-  
+
   // Renderizar la vista de pagos y pasar los datos necesarios
   res.render('User/payments', {
     id, // Asegúrate de que 'id' esté incluido aquí

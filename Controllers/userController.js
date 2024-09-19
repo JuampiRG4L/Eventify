@@ -77,7 +77,16 @@ async function loginUsuario(req, res) {
             return res.status(400).json({ success: false, message: 'Contraseña incorrecta' });
         }
 
-        res.status(200).json({ success: true, message: 'Inicio de Sesión Exitoso', user: usuario });
+        // Generar token o cualquier otro proceso necesario
+
+        res.status(200).json({
+            success: true,
+            message: 'Inicio de Sesión Exitoso',
+            user: {
+                id: usuario.id,
+                rol: usuario.rol,
+            }
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: 'Hubo un problema al iniciar sesión' });
