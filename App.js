@@ -80,6 +80,17 @@ app.get('/login', (req, res) => {
   res.render('Login');
 });
 
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/dashboard', // Esto debe cambiarse
+  failureRedirect: '/login',
+}), (req, res) => {
+  if (req.user.rol === 'admin') {
+    return res.redirect('/admin/dashboard');
+  } else {
+    return res.redirect('/user/index'); // Cambia esto según tu lógica de usuario
+  }
+});
+
 // Ruta para redirigir a Google para la autenticación
 app.get('/auth/google', passport.authenticate('google', {
   scope: ['profile', 'email']
@@ -91,10 +102,10 @@ app.get('/auth/google/callback',
     // Lógica para redirigir según el rol del usuario
     if (req.user.rol === 'admin') {
       // Si es administrador, redirigir al dashboard
-      res.redirect('/admin/dashboard');
+      return res.redirect('/admin/dashboard');
     } else {
       // Si es un usuario normal, redirigir al index o página principal
-      res.redirect('/index');
+      return res.redirect('/user/index');
     }
 });
 
