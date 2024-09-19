@@ -26,10 +26,10 @@
           </div>
             <ul class="list" id="enlaces">
                 <li class="item">
-                  <a href="/index" class="link">EVENTIFY</a>
+                  <a href="/user/index" class="link">EVENTIFY</a>
                 </li>
                 <li class="item">
-                    <a href="/index" class="link">INICIO</a>
+                    <a href="/user/index" class="link">INICIO</a>
                 </li>
                 <li class="item">
                     <a href="/user/halls" class="link">SALONES</a>
@@ -38,94 +38,51 @@
                     <a href="/user/reservation" class="link">RESERVAS</a>
                 </li>
                 <li class="item">
+                    <a href="/user/payments" class="link">PAGOS</a>
+                </li>
+                <li class="item">
                     <a href="/Login" class="link">INICIAR SESIÓN</a>
                 </li>
             </ul>
         </nav>
     </header>
     <div class="container">
-      <div class="content">
-        <% if (!salon) { %>
-          <p class="text_sbn">Salón no encontrado.</p>
-        <% } else { %>
-          <div class="imagen">
-            <img src="/uploads/<%= salon.image %>" alt="" class="img">
-          </div>
-          <div class="info">
-              <p class="text"><%= salon.address %></p>
-              <p class="text"><%= salon.name %></p>
-              <p class="text">$<%= salon.price %> COP NOCHE</p>
-              <p class="text">CAPACIDAD: <%= salon.capacidad %> PERSONAS</p>
-          </div>
-          <div class="fecha">
-            <form id="paymentForm" action="/user/payments" method="POST" class="form_h">
-              <input type="hidden" name="id" value="<%= salon.id %>">
-              <input type="hidden" name="name" value="<%= salon.name %>">
-              <input type="hidden" name="capacidad" value="<%= salon.capacidad %>">
-              <input type="hidden" name="price" value="<%= salon.price %>">
-              <input type="hidden" name="image" value="<%= salon.image %>">
-              <label for="fecha" class="label_h">Fecha del Evento</label>
-              <input type="date" id="fecha" name="fecha" required class="input_h">
-              <label for="horaInicio" class="label_h">Hora de Inicio del Evento</label>
-              <select id="horaInicio" name="horaInicio" required class="input_h">
-                <% 
-                  let horas = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00'];
-                  horas.forEach(function(hora) { 
-                %>
-                  <option value="<%= hora %>"><%= hora %></option>
-                <% }); %>
-              </select>
-              <label for="horaFin" class="label_h">Hora Fin del Evento</label>
-              <select id="horaFin" name="horaFin" required class="input_h">
-                <% horas.forEach(function(hora) { %>
-                  <option value="<%= hora %>"><%= hora %></option>
-                <% }); %>
-              </select>
-              <div id="error-message" style="color: red; display: none;">
-                La reserva debe durar al menos 4 horas.
-              </div>
-              <button type="submit" class="btn_sh">Alquilar Salón</button>
-            </form>
-          </div>
-        <% } %>
-      </div>
+        <h1 class="title">SALÓN AURORA</h1>
+        <div class="content">
+            <div class="imagen">
+                <img src="/Public/img/Salon2.jpg" alt="" class="img">
+            </div>
+            <div class="info">
+                <div class="info-p">
+                    <p class="text">BELLO, ANTIOQUÍA</p>
+                    <p class="text">$200.000 COP NOCHE</p>
+                    <p class="text">CAPACIDAD: 100 PERSONAS</p>
+                    <button id="" class="btn">PAGAR</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container_text">
-      <h3 class="title_text_sub">Lo que ofrece este Salón</h3>
+        <h3 class="title_text_sub">Lo que ofrece el Salón Aurora</h3>
         <div class="content-text">
-            <div class="text_sub">
-                <% if (salon.cocina) { %>
+            <div class="text_sub_h">
+                <div class="text_sub">
                     <p class="text_alb"><img src="/Public/img/cocinero.png" alt="" class="img_text_sub">Cocina equipada para catering de eventos</p>
-                <% } %>
-                <% if (salon.wifi) { %>
                     <p class="text_alb"><img src="/Public/img/Wi-Fi.png" alt="" class="img_text_sub">Wifi de 26 Mbps para todas las necesidades tecnológicas</p>
-                <% } %>
-                <% if (salon.estacionamiento) { %>
                     <p class="text_alb"><img src="/Public/img/Estacionamiento.png" alt="" class="img_text_sub">Estacionamiento amplio y gratuito</p>
-                <% } %>
-                <% if (salon.guardaObjetos) { %>
                     <p class="text_alb"><img src="/Public/img/Guardar.png" alt="" class="img_text_sub">Guarda de objetos para organizadores antes y después del evento</p>
-                <% } %>
-                <% if (salon.jardin) { %>
                     <p class="text_alb"><img src="/Public/img/Jardin.png" alt="" class="img_text_sub">Jardín parcialmente cercado, ideal para fotos y actividades al aire libre</p>
-                <% } %>
-            </div>
-            <div class="text_sub">
-              <% if (salon.balcon) { %>
+                </div>
+                <div class="text_sub">
                     <p class="text_alb"><img src="/Public/img/Balcon.png" alt="" class="img_text_sub">Balcón privado con vistas relajantes</p>
-                <% } %>
-                <% if (salon.decoracion) { %>
                     <p class="text_alb"><img src="/Public/img/Adorno.png" alt="" class="img_text_sub">Decoración moderna y personalizable para reflejar el estilo del evento</p>
-                <% } %>
-                <% if (salon.sonido) { %>
                     <p class="text_alb"><img src="/Public/img/Sonido.png" alt="" class="img_text_sub">Sistema de sonido y tecnología audiovisual moderna</p>
-                <% } %>
-                <% if (salon.banos) { %>
                     <p class="text_alb"><img src="/Public/img/Baño.png" alt="" class="img_text_sub">Baños amplios y bien mantenidos para la comodidad de los invitados</p>
-                <% } %>
-                <% if (salon.movilidad) { %>
                     <p class="text_alb"><img src="/Public/img/Discapacitado.png" alt="" class="img_text_sub">Acceso para personas con movilidad reducida</p>
-                <% } %>
+                </div>
+            </div>
+            <div class="map_sub">
+                <div id="map" class="map"></div>
             </div>
         </div>
     </div>
@@ -161,7 +118,7 @@
     </footer>
 </body>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="/Public/Js/map.js"></script> 
 <script src="/Public/Js/loading_screen.js"></script>
 <script src="/Public/Js/header.js"></script>
-<script src="/Public/Js/dispo.js"></script>
 </html>

@@ -18,17 +18,17 @@
     </div>
     <header id="menu">
         <nav class="nav">
-            <div class="menu-toggle" id="menu-toggle">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
+          <div class="menu-toggle" id="menu-toggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
             <ul class="list" id="enlaces">
                 <li class="item">
-                    <a href="/index" class="link">EVENTIFY</a>
+                  <a href="/user/index" class="link">EVENTIFY</a>
                 </li>
                 <li class="item">
-                    <a href="/index" class="link">INICIO</a>
+                    <a href="/user/index" class="link">INICIO</a>
                 </li>
                 <li class="item">
                     <a href="/user/halls" class="link">SALONES</a>
@@ -37,11 +37,15 @@
                     <a href="/user/reservation" class="link">RESERVAS</a>
                 </li>
                 <li class="item">
+                    <a href="/user/payments" class="link">PAGOS</a>
+                </li>
+                <li class="item">
                     <a href="/Login" class="link">INICIAR SESIÓN</a>
                 </li>
             </ul>
         </nav>
     </header>
+<<<<<<< HEAD
     <!-- Agregar el input oculto para el ID del salón -->
     <input type="hidden" id="salon-id" value="<%= id %>">
 
@@ -53,6 +57,17 @@
         <p>Precio por noche: $<%= price %> COP</p>
         <p>Capacidad: <%= capacidad %> personas</p>
         <p>Fecha de reserva: <%= fecha %></p>
+=======
+    <div class="payment-container">
+        <h2>Confirmar y Pagar</h2>
+        <div id="payment-info">
+            <!-- Aquí se mostrará la información de los salones y el total -->
+        </div>
+        <div class="total">
+            <p>Total a pagar: $<span id="total-amount">0</span></p>
+        </div>
+        <button id="confirm-payment" type="button">Confirmar y Pagar</button>
+>>>>>>> 51f1c95dcc49c81ddd320a5f244eae92ea431e82
     </div>
     
     <div class="total">
