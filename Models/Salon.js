@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database'); // Asegúrate de que esta ruta es correcta
 
 const Salon = sequelize.define('Salon', {

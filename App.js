@@ -6,6 +6,7 @@ const passport = require('passport');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
 const path = require('path');
+const { Salon } = require('./models');
 require('./config/db');
 
 const app = express();
@@ -57,6 +58,8 @@ app.use('/admin', adminRoutes);
 
 const salonController = require('./Controllers/salonController');
 
+const reservationController = require('./Controllers/reservationController')
+
 const userRoutes = require('./Routes/userRoutes'); 
 app.use('/user', userRoutes);
 
@@ -103,9 +106,30 @@ app.get('/reset-password', (req, res) => {
   res.render('RestablecimientoContraseña');
 });
 
-app.get('/user/payments', (req, res) => {
-  res.render('User/payments');
+app.get('/user/payments/:id', async (req, res) => {
+  try {
+      const salonId = req.params.id;
+      const salon = await Salon.findByPk(salonId); // Asegúrate de que 'Salon' esté definido
+
+      if (!salon) {
+          return res.redirect('/user/reservations'); // Redirige si no se encuentra
+      }
+
+      res.render('User/payments', {
+          salon: salon,
+          id: salon.id,
+          name: salon.name,
+          price: salon.price,
+          capacidad: salon.capacidad,
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error en el servidor');
+  }
 });
+
+
+
 
 // Manejo de errores y puerto
 // app.use((req, res, next) => {
@@ -141,18 +165,16 @@ app.get('/user/reservation', (req, res) => {
 
 // Manejar tanto GET como POST para /user/payments
 app.post('/user/payments', (req, res) => {
-  const { id, name, capacidad, price, image, fecha, horaInicio, horaFin } = req.body;
+  const { id, name, capacidad, price, image, fecha } = req.body; // Asegúrate de extraer 'id'
   
   // Renderizar la vista de pagos y pasar los datos necesarios
-  res.render('User/payments', { // Especifica la carpeta 'User'
-    id, 
+  res.render('User/payments', {
+    id, // Asegúrate de que 'id' esté incluido aquí
     name, 
     capacidad, 
     price, 
     image, 
-    fecha, 
-    horaInicio, 
-    horaFin 
+    fecha 
   });
 });
 
@@ -171,6 +193,8 @@ app.get('/perfil', (req, res) => {
 app.get('/halls', salonController.getAllSalons);
 
 app.get('/sub_halls', salonController.getSalonDetailsUser);
+
+
 
 
 // Puerto

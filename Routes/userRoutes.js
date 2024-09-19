@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../Controllers/authController');
 const salonController = require('../Controllers/salonController');
+const reservationController = require('../Controllers/reservationController');
 const { isAuthenticated, ensureAdmin } = require('../Middleware/auth');
 
 // Rutas
@@ -13,10 +14,9 @@ router.get('/index', (req, res) => {
   res.render('User/index');
 });
 
+router.get('/reservation', reservationController.getReservas);
 
-router.get('/reservation', (req, res) => {
-  res.render('User/reservation');
-});
+router.post('/reservation', reservationController.createReserva);
 
 // Ruta para registro de usuario
 router.post('/register', authController.registrarUsuario);
