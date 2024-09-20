@@ -4,10 +4,29 @@
     box-sizing: border-box;
 }
 
+.form_e {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: red;
+}
+
+.imagen {
+    width: 60%;
+}
+
+.img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+}
+
 .form_add {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .add_Room {
@@ -15,7 +34,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
+    width: 50%;
 }
 
 .container {

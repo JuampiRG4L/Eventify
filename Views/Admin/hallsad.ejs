@@ -4,15 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Salones</title>
+  <link rel="stylesheet" href="/Public/Css/hallsad.css">
+  <link rel="shortcut icon" href="/Public/img/Icono_l.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Lista de Salones</h1>
-  
-  <button onclick="location.href='/admin/add-room'">Agregar Salón</button>
-  <button onclick="location.href='/admin/dashboard'">Volver a la principal</button>
-
+  <div class="container_a">
+    <h1 class="title_hall_s">Lista de Salones</h1>
+    <button onclick="location.href='/admin/add-room'" class="btn_hall_s">Agregar Salón</button>
+    <button onclick="location.href='/admin/dashboard'" class="btn_hall_s">Inicio</button>
+  </div>
   <% if (!salons || salons.length === 0) { %>
-    <p>No hay salones disponibles</p>
+    <p class="text_no_h">No hay salones disponibles</p>
   <% } else { %>
     <div class="container">
       <% salons.forEach((salon) => { %>
@@ -28,13 +33,11 @@
                 <p class="text">$<%= salon.price %> COP NOCHE</p>
                 <p class="text">CAPACIDAD: <%= salon.capacidad %> PERSONAS</p>
                 <button onclick="location.href='/admin/sub_hallsad/<%= salon.id %>'" class="btn">MÁS INFORMACIÓN</button>
-                 <a href="/admin/edit-room/<%= salon.id %>" class="btn">Editar</a>
-                <form action="/admin/delete-room/<%= salon.id %>" method="POST" style="display:inline;">
+                 <a href="/admin/edit-room/<%= salon.id %>" class="btn_a">Editar</a>
+                <form action="/admin/delete-room/<%= salon.id %>" method="POST" style="display:inline;" class="form_a">
                   <button type="submit" class="btn">Eliminar</button>
                 </form>
-                <br>
                 <!-- Botones de editar y eliminar -->
-               
               </div>
             </div>
           </div>
@@ -42,6 +45,5 @@
       <% }) %>
     </div>
   <% } %>
-
 </body>
 </html>

@@ -201,7 +201,8 @@ input {
   width: 768px;
   max-width: 100%;
   min-height: 500px;
-  margin-top: 150px;
+  height: auto;
+  margin: 10px 0;
 }
 
 @media (max-width: 768px) {

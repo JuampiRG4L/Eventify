@@ -10,39 +10,33 @@
 <body>
   <div class="form_add">
     <form action="/admin/add-room" method="POST" enctype="multipart/form-data" class="add_Room">
-      <h1>Agregar Salón</h1>
-      <label for="name">Nombre del salón:</label>
-      <input type="text" id="name" name="name" required>
-      <label for="address">Dirección:</label>
-      <input type="text" id="address" name="address" required>
-      <label for="price">Precio del salón:</label>
-      <input type="number" id="price" name="price" required>
-      <label for="image">Imagen del salón:</label>
-      <input type="file" id="image" name="image" required>
-      <label for="capacidad">Capacidad del salón (número de personas):</label>
-      <input type="number" id="capacidad" name="capacidad" required>
-      <label for="cocina">Cocina:</label>
-      <input type="checkbox" id="cocina" name="cocina">
-      <label for="wifi">WiFi:</label>
-      <input type="checkbox" id="wifi" name="wifi">
-      <label for="estacionamiento">Estacionamiento:</label>
-      <input type="checkbox" id="estacionamiento" name="estacionamiento">
-      <label for="guardaObjetos">Guarda Objetos:</label>
-      <input type="checkbox" id="guardaObjetos" name="guardaObjetos">
-      <label for="jardin">Jardín:</label>
-      <input type="checkbox" id="jardin" name="jardin">
-      <label for="balcon">Balcón:</label>
-      <input type="checkbox" id="balcon" name="balcon">
-      <label for="decoracion">Decoración:</label>
-      <input type="checkbox" id="decoracion" name="decoracion">
-      <label for="sonido">Sonido:</label>
-      <input type="checkbox" id="sonido" name="sonido">
-      <label for="banos">Baños:</label>
-      <input type="checkbox" id="banos" name="banos">
-      <label for="movilidad">Movilidad:</label>
-      <input type="checkbox" id="movilidad" name="movilidad">
-      <button type="submit">Agregar Salón</button>
-      <a href="/admin/dashboard">Volver al dashboard</a>
+      <div class="container">
+      <h1 class="title_add">Agregar Salón</h1>
+      <label for="name" class="label_add">Nombre del salón</label>
+      <input type="text" id="name" name="name" required class="input_add">
+      <label for="address" class="label_add">Dirección</label>
+      <input type="text" id="address" name="address" required class="input_add">
+      <label for="price" class="label_add">Precio del salón</label>
+      <input type="number" id="price" name="price" required class="input_add">
+      <label for="image" class="label_add">Imagen del salón</label>
+      <input type="file" id="image" name="image" required class="input_add_a">
+      <label for="capacidad" class="label_add">Capacidad del salón (número de personas)</label>
+      <input type="number" id="capacidad" name="capacidad" required class="input_add">
+      </div>
+      <div class="content">
+      <label for="cocina" class="label_Room">Cocina<input type="checkbox" id="cocina" name="cocina" class="input_Room"></label>
+      <label for="wifi" class="label_Room">WiFi<input type="checkbox" id="wifi" name="wifi" class="input_Room"></label>
+      <label for="estacionamiento" class="label_Room">Estacionamiento<input type="checkbox" id="estacionamiento" name="estacionamiento" class="input_Room"></label>
+      <label for="guardaObjetos" class="label_Room">Guarda Objetos<input type="checkbox" id="guardaObjetos" name="guardaObjetos" class="input_Room"></label>
+      <label for="jardin" class="label_Room">Jardín<input type="checkbox" id="jardin" name="jardin" class="input_Room"></label>
+      <label for="balcon" class="label_Room">Balcón<input type="checkbox" id="balcon" name="balcon" class="input_Room"></label>
+      <label for="decoracion" class="label_Room">Decoración<input type="checkbox" id="decoracion" name="decoracion" class="input_Room"></label>
+      <label for="sonido" class="label_Room">Sonido<input type="checkbox" id="sonido" name="sonido" class="input_Room"></label>
+      <label for="banos" class="label_Room">Baños<input type="checkbox" id="banos" name="banos" class="input_Room"></label>
+      <label for="movilidad" class="label_Room">Movilidad<input type="checkbox" id="movilidad" name="movilidad" class="input_Room"></label>
+      </div>
+      <button type="submit" class="btn_Room">Agregar Salón</button>
+      <a href="/admin/dashboard" class="link_Room">Volver al Dashboard</a>
     </form>
   </div>
 </body>
