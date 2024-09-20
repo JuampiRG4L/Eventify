@@ -5,10 +5,6 @@ const mysql = require('mysql2/promise');
 const passport = require('passport');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
-const auth = require('./Middleware/auth');
-const authRoutes = require('./Routes/authRoutes');
-const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
-const userRoutes = require('./Routes/userRoutes')
 const path = require('path');
 const { Salon } = require('./models');
 require('./config/db');
@@ -23,18 +19,15 @@ const db = mysql.createPool({
   database: 'ProyectoEventify'
 });
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use('/uploads', express.static('public/uploads'));
 app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
-app.set('view cache', false);
-
 
 // Configuración para servir archivos estáticos
-app.use('/Public', express.static(path.join(__dirname, '/Public')));
+app.use('/Public', express.static(path.join(__dirname, 'Public')));
 app.use('/libs', express.static(path.join(__dirname, 'libs')));
 
 // Configurar sesiones
@@ -54,32 +47,46 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', userRoutes)
+// Rutas
+const authRoutes = require('./Routes/authRoutes');
+app.use('/', authRoutes);
+console.log('Rutas de autenticación cargadas');
+
+const adminRoutes = require('./Routes/adminRoutes'); 
 app.use('/admin', adminRoutes);
 
 const salonController = require('./Controllers/salonController');
+const reservationController = require('./Controllers/reservationController');
 
-const reservationController = require('./Controllers/reservationController')
-
-const userRoutes = require('./Routes/userRoutes');
+const userRoutes = require('./Routes/userRoutes'); 
 app.use('/user', userRoutes);
-app.use( authRoutes )
+
+// Rutas de vistas
+app.get('/', (req, res) => {
+  res.render('User/index');
+});
+
+app.get('/index', (req, res) => {
+  res.render('User/index');
+});
+
+app.get('/sub_halls', (req, res) => {
+  res.render('User/sub_halls');
+});
 
 app.get('/login', (req, res) => {
   res.render('Login');
 });
 
 app.post('/login', passport.authenticate('local', {
-  successRedirect: '/dashboard', // Esto debe cambiarse
   failureRedirect: '/login',
 }), (req, res) => {
   if (req.user.rol === 'admin') {
     return res.redirect('/admin/dashboard');
   } else {
-    return res.redirect('/user/index'); // Cambia esto según tu lógica de usuario
+    return res.redirect('/user/index');
   }
 });
-
 
 // Ruta para redirigir a Google para la autenticación
 app.get('/auth/google', passport.authenticate('google', {
@@ -89,19 +96,12 @@ app.get('/auth/google', passport.authenticate('google', {
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    // Lógica para redirigir según el rol del usuario
     if (req.user.rol === 'admin') {
-      // Si es administrador, redirigir al dashboard
       return res.redirect('/admin/dashboard');
     } else {
-      // Si es un usuario normal, redirigir al index o página principal
       return res.redirect('/user/index');
     }
 });
-
-// app.get('/auth/google', passport.Authenticator ('google', {
-//   scope:['profile', 'email']
-// }));
 
 app.get('/reset-password', (req, res) => {
   res.render('RestablecimientoContraseña');
@@ -110,10 +110,10 @@ app.get('/reset-password', (req, res) => {
 app.get('/user/payments/:id', async (req, res) => {
   try {
       const salonId = req.params.id;
-      const salon = await Salon.findByPk(salonId); // Asegúrate de que 'Salon' esté definido
+      const salon = await Salon.findByPk(salonId);
 
       if (!salon) {
-          return res.redirect('/user/reservations'); // Redirige si no se encuentra
+          return res.redirect('/user/reservations');
       }
 
       res.render('User/payments', {
@@ -129,68 +129,45 @@ app.get('/user/payments/:id', async (req, res) => {
   }
 });
 
-
-
-
-// Manejo de errores y puerto
-// app.use((req, res, next) => {
-//   res.status(404).send('Página no encontrada');
-// });
-
-
 // Rutas para administradores
-const auth = require('./Middleware/auth')
-app.get('/admin/dashboard', auth.ensureAdmin, (req, res) => {
-  res.render('Admin/dashboard');  // Redirige al dashboard de admin
+const auth = require('./Middleware/auth');
+app.get('/admin/dashboard', (req, res) => {
+  res.render('Admin/dashboard');
 });
 
-app.get('/admin/add-room', auth.ensureAdmin, (req, res) => {
-  res.render('Admin/addRoom');  // Redirige a la página para agregar salones
+app.get('/admin/add-room', (req, res) => {
+  res.render('Admin/addRoom');
 });
 
-app.get('/admin/edit-room', auth.ensureAdmin, (req, res) => {
-  res.render('Admin/editRoom');  // Redirige a la página para editar salones
+app.get('/admin/edit-room', (req, res) => {
+  res.render('Admin/editRoom');
 });
 
-
-//DEJAR ESTO QUIETO
-// app.get('/reservation', auth.ensureAdmin, (req, res) => {
-//   res.render('User/reservation');
-// });
-
+// DEJAR ESTO QUIETO
 app.get('/user/reservation', (req, res) => {
   res.render('User/reservation');
 });
 
 // Manejar tanto GET como POST para /user/payments
 app.post('/user/payments', (req, res) => {
-  const { id, name, capacidad, price, image, fecha } = req.body; // Asegúrate de extraer 'id'
+  const { id, name, capacidad, price, image, fecha } = req.body;
 
-  // Renderizar la vista de pagos y pasar los datos necesarios
   res.render('User/payments', {
-    id, // Asegúrate de que 'id' esté incluido aquí
-    name, 
-    capacidad, 
-    price, 
-    image, 
-    fecha 
+    id,
+    name,
+    capacidad,
+    price,
+    image,
+    fecha
   });
 });
 
-
-
-
-// Ejemplo de ruta para perfil, debería usar userController si es necesario
-// app.get('/perfil', auth.isAuthenticated, (req, res) => {
-//   res.json({ message: 'Perfil del usuario', user: req.user });
-// });
-
 app.get('/perfil', (req, res) => {
-  res.json({ message: 'Perfil del usuario'});
+  res.json({ message: 'Perfil del usuario' });
 });
 
-
-
+app.get('/halls', salonController.getAllSalons);
+app.get('/sub_halls', salonController.getSalonDetailsUser);
 
 // Puerto
 const PORT = process.env.PORT || 3000;

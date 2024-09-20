@@ -18,14 +18,14 @@
     </div>
     <header id="menu">
         <nav class="nav">
-          <div class="menu-toggle" id="menu-toggle">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
             <ul class="list" id="enlaces">
                 <li class="item">
-                  <a href="/user/index" class="link">EVENTIFY</a>
+                    <a href="/user/index" class="link">EVENTIFY</a>
                 </li>
                 <li class="item">
                     <a href="/user/index" class="link">INICIO</a>
@@ -45,88 +45,79 @@
             </ul>
         </nav>
     </header>
-<<<<<<< HEAD
+
+    <!-- Agregar el input oculto para el ID del salón -->
+    <input type="hidden" id="salon-id" value="<%= id %>">
+
     <div class="payment-container">
         <h2>Confirmar y Pagar</h2>
+        <div class="salon-details">
+            <h3>Nombre del Salón: <%= name %></h3>
+            <p>Precio por noche: $<%= price %> COP</p>
+            <p>Capacidad: <%= capacidad %> personas</p>
+            <p>Fecha de reserva: <%= fecha %></p>
+        </div>
         <div id="payment-info">
             <!-- Aquí se mostrará la información de los salones y el total -->
         </div>
         <div class="total">
-            <p>Total a pagar: $<span id="total-amount">0</span></p>
+            <p>Total a pagar: $<span id="total-amount"><%= price %></span></p>
         </div>
+        
         <button id="confirm-payment" type="button">Confirmar y Pagar</button>
-=======
-    <!-- Agregar el input oculto para el ID del salón -->
-    <input type="hidden" id="salon-id" value="<%= id %>">
 
-
-<div class="payment-container">
-    <h2>Confirmar y Pagar</h2>
-    <div class="salon-details">
-        <h3>Nombre del Salón: <%= name %></h3>
-        <p>Precio por noche: $<%= price %> COP</p>
-        <p>Capacidad: <%= capacidad %> personas</p>
-        <p>Fecha de reserva: <%= fecha %></p>
->>>>>>> Pablo
-    </div>
-    
-    <div class="total">
-        <p>Total a pagar: $<span id="total-amount"><%= price %></span></p>
-    </div>
-    
-    <!-- Opción de método de pago -->
-    <div class="payment-method">
-        <label for="payment-method">Método de Pago:</label>
-        <select id="payment-method" name="paymentMethod">
-            <option value="efectivo">Efectivo</option>
-            <option value="tarjeta">Tarjeta de Crédito/Débito</option>
-        </select>
-    </div>
-
-    <!-- Campos adicionales para pago con tarjeta -->
-    <div id="card-details" style="display: none;">
-        <div>
-            <label for="card-holder-name">Nombre del Titular:</label>
-            <input type="text" id="card-holder-name" name="cardHolderName">
+        <!-- Opción de método de pago -->
+        <div class="payment-method">
+            <label for="payment-method">Método de Pago:</label>
+            <select id="payment-method" name="paymentMethod" onchange="toggleCardDetails()">
+                <option value="efectivo">Efectivo</option>
+                <option value="tarjeta">Tarjeta de Crédito/Débito</option>
+            </select>
         </div>
-        <div>
-            <label for="card-expiration-month">Fecha de Caducidad:</label>
+
+        <!-- Campos adicionales para pago con tarjeta -->
+        <div id="card-details" style="display: none;">
             <div>
-                <select id="card-expiration-month" name="cardExpirationMonth">
-                    <option value="">Mes</option>
-                    <option value="01">Enero</option>
-                    <option value="02">Febrero</option>
-                    <option value="03">Marzo</option>
-                    <option value="04">Abril</option>
-                    <option value="05">Mayo</option>
-                    <option value="06">Junio</option>
-                    <option value="07">Julio</option>
-                    <option value="08">Agosto</option>
-                    <option value="09">Septiembre</option>
-                    <option value="10">Octubre</option>
-                    <option value="11">Noviembre</option>
-                    <option value="12">Diciembre</option>
-                </select>
-                <select id="card-expiration-year" name="cardExpirationYear">
-                    <option value="">Año</option>
-                    <script>
-                        const currentYear = new Date().getFullYear();
-                        for (let i = 0; i < 10; i++) {
-                            document.write(`<option value="${currentYear + i}">${currentYear + i}</option>`);
-                        }
-                    </script>
-                </select>
-                
+                <label for="card-holder-name">Nombre del Titular:</label>
+                <input type="text" id="card-holder-name" name="cardHolderName">
             </div>
-        </div>            
-        <div>
-            <label for="card-cvc">CVC:</label>
-            <input type="text" id="card-cvc" name="cardCVC" maxlength="4">
+            <div>
+                <label for="card-expiration-month">Fecha de Caducidad:</label>
+                <div>
+                    <select id="card-expiration-month" name="cardExpirationMonth">
+                        <option value="">Mes</option>
+                        <option value="01">Enero</option>
+                        <option value="02">Febrero</option>
+                        <option value="03">Marzo</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Mayo</option>
+                        <option value="06">Junio</option>
+                        <option value="07">Julio</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                    <select id="card-expiration-year" name="cardExpirationYear">
+                        <option value="">Año</option>
+                        <script>
+                            const currentYear = new Date().getFullYear();
+                            for (let i = 0; i < 10; i++) {
+                                document.write(`<option value="${currentYear + i}">${currentYear + i}</option>`);
+                            }
+                        </script>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="card-cvc">CVC:</label>
+                <input type="text" id="card-cvc" name="cardCVC" maxlength="4">
+            </div>
         </div>
-    </div>
-    <a href="/user/payments/<%= id %>">Pagar</a>
 
-</div>
+        <a href="/user/payments/<%= id %>">Pagar</a>
+    </div>
 
     <footer>
         <div class="content-f">
@@ -158,8 +149,9 @@
             <p class="text-fd">Copyright © 2024 Eventify Colombia - Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script src="/Public/Js/loading_screen.js"></script>
+    <script src="/Public/Js/payments.js"></script>
+    <script src="/Public/Js/header.js"></script>
 </body>
-<script src="/Public/Js/loading_screen.js"></script>
-<script src="/Public/Js/payments.js"></script>
-<script src="/Public/Js/header.js"></script>
 </html>
