@@ -5,10 +5,6 @@ const mysql = require('mysql2/promise');
 const passport = require('passport');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
-const auth = require('./Middleware/auth');
-const authRoutes = require('./Routes/authRoutes');
-const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
-const userRoutes = require('./Routes/userRoutes')
 const path = require('path');
 const { Salon } = require('./models');
 require('./config/db');
@@ -30,8 +26,6 @@ app.use(fileUpload());
 app.use('/uploads', express.static('public/uploads'));
 app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
-app.set('view cache', false);
-
 
 // Configuración para servir archivos estáticos
 app.use('/Public', express.static(path.join(__dirname, '/Public')));
@@ -54,25 +48,38 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', userRoutes)
+// Rutas
+const authRoutes = require('./Routes/authRoutes');
+app.use('/', authRoutes);
+console.log('Rutas de autenticación cargadas');
+
+const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
 app.use('/admin', adminRoutes);
-<<<<<<< HEAD
 
 const salonController = require('./Controllers/salonController');
 
 const reservationController = require('./Controllers/reservationController')
 
-const userRoutes = require('./Routes/userRoutes');
-=======
->>>>>>> 51f1c95dcc49c81ddd320a5f244eae92ea431e82
+const userRoutes = require('./Routes/userRoutes'); 
 app.use('/user', userRoutes);
-app.use( authRoutes )
+
+// Rutas de vistas
+app.get('/', (req, res) => {
+  res.render('User/index'); // Renderizar vista principal de usuario
+});
+
+app.get('/index', (req, res) => {
+  res.render('User/index');
+});
+
+app.get('/sub_halls', (req, res) => {
+  res.render('User/sub_halls');
+});
 
 app.get('/login', (req, res) => {
   res.render('Login');
 });
 
-<<<<<<< HEAD
 // Ruta para redirigir a Google para la autenticación
 app.get('/auth/google', passport.authenticate('google', {
   scope: ['profile', 'email']
@@ -120,8 +127,6 @@ app.get('/user/payments/:id', async (req, res) => {
       res.status(500).send('Error en el servidor');
   }
 });
-=======
->>>>>>> 51f1c95dcc49c81ddd320a5f244eae92ea431e82
 
 
 
@@ -131,18 +136,17 @@ app.get('/user/payments/:id', async (req, res) => {
 //   res.status(404).send('Página no encontrada');
 // });
 
-<<<<<<< HEAD
 // Rutas para administradores
 const auth = require('./Middleware/auth')
-app.get('/admin/dashboard', auth.ensureAdmin, (req, res) => {
+app.get('/admin/dashboard', (req, res) => {
   res.render('Admin/dashboard');  // Redirige al dashboard de admin
 });
 
-app.get('/admin/add-room', auth.ensureAdmin, (req, res) => {
+app.get('/admin/add-room', (req, res) => {
   res.render('Admin/addRoom');  // Redirige a la página para agregar salones
 });
 
-app.get('/admin/edit-room', auth.ensureAdmin, (req, res) => {
+app.get('/admin/edit-room', (req, res) => {
   res.render('Admin/editRoom');  // Redirige a la página para editar salones
 });
 
@@ -163,11 +167,11 @@ app.post('/user/payments', (req, res) => {
   // Renderizar la vista de pagos y pasar los datos necesarios
   res.render('User/payments', {
     id, // Asegúrate de que 'id' esté incluido aquí
-    name, 
-    capacidad, 
-    price, 
-    image, 
-    fecha 
+    name,
+    capacidad,
+    price,
+    image,
+    fecha
   });
 });
 
@@ -179,14 +183,12 @@ app.post('/user/payments', (req, res) => {
 //   res.json({ message: 'Perfil del usuario', user: req.user });
 // });
 
-=======
->>>>>>> 51f1c95dcc49c81ddd320a5f244eae92ea431e82
 app.get('/perfil', (req, res) => {
   res.json({ message: 'Perfil del usuario'});
 });
 
-
-
+app.get('/halls', salonController.getAllSalons);
+app.get('/sub_halls', salonController.getSalonDetailsUser);
 
 // Puerto
 const PORT = process.env.PORT || 3000;
