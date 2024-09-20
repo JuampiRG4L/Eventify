@@ -26,10 +26,10 @@
           </div>
             <ul class="list" id="enlaces">
                 <li class="item">
-                  <a href="/user/index" class="link">EVENTIFY</a>
+                  <a href="/index" class="link">EVENTIFY</a>
                 </li>
                 <li class="item">
-                    <a href="/user/index" class="link">INICIO</a>
+                    <a href="/index" class="link">INICIO</a>
                 </li>
                 <li class="item">
                     <a href="/user/halls" class="link">SALONES</a>
@@ -38,54 +38,136 @@
                     <a href="/user/reservation" class="link">RESERVAS</a>
                 </li>
                 <li class="item">
-                    <a href="/user/payments" class="link">PAGOS</a>
-                </li>
-                <li class="item">
                     <a href="/Login" class="link">INICIAR SESIÓN</a>
                 </li>
             </ul>
         </nav>
     </header>
     <div class="container">
-        <h1 class="title">SALÓN AURORA</h1>
-        <div class="content">
-            <div class="imagen">
-                <img src="/Public/img/Salon2.jpg" alt="" class="img">
-            </div>
+        <% if (!salon) { %>
+            <p>Salón no encontrado.</p>
+        <% } else { %>
+            
+            <img src="/uploads/<%= salon.image %>" alt="" class="img">
             <div class="info">
-                <div class="info-p">
-                    <p class="text">BELLO, ANTIOQUÍA</p>
-                    <p class="text">$200.000 COP NOCHE</p>
-                    <p class="text">CAPACIDAD: 100 PERSONAS</p>
-                    <button id="" class="btn">PAGAR</button>
-                </div>
+                <div class="info-p"></div>
             </div>
-        </div>
+            <p class="text"><%= salon.address %></p>
+            <p class="text">Precio: $<%= salon.price %> COP NOCHE</p>
+            <p class="text">Capacidad: <%= salon.capacidad %> PERSONAS</p>
+            <form action="/user/payments" method="POST">
+                <p class="text"><%= salon.address %></p>
+                <p class="text"><%= salon.name %></p>
+                <p class="text">$<%= salon.price %> COP NOCHE</p>
+                <p class="text">CAPACIDAD: <%= salon.capacidad %> PERSONAS</p>
+              </div>
+            <form id="paymentForm" action="/user/payments" method="POST">
+                <input type="hidden" name="id" value="<%= salon.id %>">
+                <input type="hidden" name="name" value="<%= salon.name %>">
+                <input type="hidden" name="capacidad" value="<%= salon.capacidad %>">
+                <input type="hidden" name="price" value="<%= salon.price %>">
+                <input type="hidden" name="image" value="<%= salon.image %>">
+                <button id="" class="btn" type="submit">Alquilar Este Salón</button>
+                </form>
+            </form>
+              
+                <!-- Campos para seleccionar fecha y hora -->
+                <label for="fecha">Seleccione la fecha:</label>
+                <input type="date" id="fecha" name="fecha" required>
+              
+                <label for="horaInicio">Seleccione la hora de inicio:</label>
+                <select id="horaInicio" name="horaInicio" required>
+                  <% 
+                    // Generar las opciones de hora desde las 10 a.m. hasta las 3 a.m.
+                    let horas = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00'];
+                    horas.forEach(function(hora) { 
+                  %>
+                    <option value="<%= hora %>"><%= hora %></option>
+                  <% }); %>
+                </select>
+              
+                <label for="horaFin">Seleccione la hora de fin:</label>
+                <select id="horaFin" name="horaFin" required>
+                  <% 
+                    // Generar las opciones de hora desde las 10 a.m. hasta las 3 a.m.
+                    horas.forEach(function(hora) { 
+                  %>
+                    <option value="<%= hora %>"><%= hora %></option>
+                  <% }); %>
+                </select>
+              
+                <div id="error-message" style="color: red; display: none;">
+                  La reserva debe durar al menos 4 horas.
+                </div>
+              
+                <button type="submit">Alquilar Este Salón</button>
+              </form>
+  
+        <% } %>
+        <h3>Características Disponibles:</h3>
+<ul>
+  <% if (salon.cocina) { %>
+    <li>Cocina</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/cocinero.png" alt="" class="img_text_sub">Cocina equipada para catering de eventos</p>
     </div>
-    <div class="container_text">
-        <h3 class="title_text_sub">Lo que ofrece el Salón Aurora</h3>
-        <div class="content-text">
-            <div class="text_sub_h">
-                <div class="text_sub">
-                    <p class="text_alb"><img src="/Public/img/cocinero.png" alt="" class="img_text_sub">Cocina equipada para catering de eventos</p>
-                    <p class="text_alb"><img src="/Public/img/Wi-Fi.png" alt="" class="img_text_sub">Wifi de 26 Mbps para todas las necesidades tecnológicas</p>
-                    <p class="text_alb"><img src="/Public/img/Estacionamiento.png" alt="" class="img_text_sub">Estacionamiento amplio y gratuito</p>
-                    <p class="text_alb"><img src="/Public/img/Guardar.png" alt="" class="img_text_sub">Guarda de objetos para organizadores antes y después del evento</p>
-                    <p class="text_alb"><img src="/Public/img/Jardin.png" alt="" class="img_text_sub">Jardín parcialmente cercado, ideal para fotos y actividades al aire libre</p>
-                </div>
-                <div class="text_sub">
-                    <p class="text_alb"><img src="/Public/img/Balcon.png" alt="" class="img_text_sub">Balcón privado con vistas relajantes</p>
-                    <p class="text_alb"><img src="/Public/img/Adorno.png" alt="" class="img_text_sub">Decoración moderna y personalizable para reflejar el estilo del evento</p>
-                    <p class="text_alb"><img src="/Public/img/Sonido.png" alt="" class="img_text_sub">Sistema de sonido y tecnología audiovisual moderna</p>
-                    <p class="text_alb"><img src="/Public/img/Baño.png" alt="" class="img_text_sub">Baños amplios y bien mantenidos para la comodidad de los invitados</p>
-                    <p class="text_alb"><img src="/Public/img/Discapacitado.png" alt="" class="img_text_sub">Acceso para personas con movilidad reducida</p>
-                </div>
-            </div>
-            <div class="map_sub">
-                <div id="map" class="map"></div>
-            </div>
-        </div>
+  <% } %>
+  <% if (salon.wifi) { %>
+    <li>WiFi</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/Wi-Fi.png" alt="" class="img_text_sub">Wifi de 26 Mbps para todas las necesidades tecnológicas</p>
     </div>
+  <% } %>
+  <% if (salon.estacionamiento) { %>
+    <li>Estacionamiento</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/Estacionamiento.png" alt="" class="img_text_sub">Estacionamiento amplio y gratuito</p>
+    </div>
+  <% } %>
+  <% if (salon.guardaObjetos) { %>
+    <li>Guarda Objetos</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/Guardar.png" alt="" class="img_text_sub">Guarda de objetos para organizadores antes y después del evento</p>
+    </div>
+  <% } %>
+  <% if (salon.jardin) { %>
+    <li>Jardín</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/Jardin.png" alt="" class="img_text_sub">Jardín parcialmente cercado, ideal para fotos y actividades al aire libre</p>
+    </div>
+  <% } %>
+  <% if (salon.balcon) { %>
+    <li>Balcón</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/Balcon.png" alt="" class="img_text_sub">Balcón privado con vistas relajantes</p>
+    </div>
+  <% } %>
+  <% if (salon.decoracion) { %>
+    <li>Decoración</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/Adorno.png" alt="" class="img_text_sub">Decoración moderna y personalizable para reflejar el estilo del evento</p>
+    </div>
+  <% } %>
+  <% if (salon.sonido) { %>
+    <li>Sistema de Sonido</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/Sonido.png" alt="" class="img_text_sub">Sistema de sonido y tecnología audiovisual moderna</p>
+    </div>
+  <% } %>
+  <% if (salon.banos) { %>
+    <li>Baños</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/Baño.png" alt="" class="img_text_sub">Baños amplios y bien mantenidos para la comodidad de los invitados</p>
+    </div>
+  <% } %>
+  <% if (salon.movilidad) { %>
+    <li>Accesibilidad para Movilidad Reducida</li>
+    <div class="text_sub">
+      <p class="text_alb"><img src="/Public/img/Discapacitado.png" alt="" class="img_text_sub">Acceso para personas con movilidad reducida</p>
+    </div>
+  <% } %>
+</ul>
+
     <footer>
         <div class="content-f">
             <img src="/Public/img/Imagen_f.jpeg" alt="" class="img-l">
@@ -121,4 +203,5 @@
 <script src="/Public/Js/map.js"></script> 
 <script src="/Public/Js/loading_screen.js"></script>
 <script src="/Public/Js/header.js"></script>
+<script src="/Public/Js/dispo.js"></script>
 </html>

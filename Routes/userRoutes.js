@@ -2,29 +2,27 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../Controllers/authController');
-const userController = require('../Controllers/userController');
-const auth = require('../Middleware/auth.js');
-const { isAuthenticated } = require('../Middleware/auth');
+const salonController = require('../Controllers/salonController');
+const userController = require('../Controllers/userController')
+const { isAuthenticated, ensureAdmin } = require('../Middleware/auth');
 
 // Rutas
 router.get('/', (req, res) => {
   res.render('User/index');
 });
 
+
+
 // Ruta del index
-router.get('/user/index', (req, res) => {
+router.get('/index', (req, res) => {
   res.render('User/index');
 });
 
 // Ruta para los salones
-router.get('/user/halls', (req, res) => {
-  res.render('User/halls');
-});
+router.get('/halls', salonController.getAllSalons);
 
 // Ruta para la información de los salones
-router.get('/user/sub_halls', (req, res) => {
-  res.render('User/sub_halls');
-});
+router.get('/sub_halls/:id', salonController.getSalonDetailsUser);
 
 // Ruta para las reservas
 router.get('/user/reservation', (req, res) => {
