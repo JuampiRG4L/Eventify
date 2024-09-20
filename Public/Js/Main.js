@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!checkRequired([emailLg, passwordLg])) {
             const correo = emailLg.value;
             const contraseña = passwordLg.value;
-    
             try {
                 const response = await fetch('/login', {
                     method: 'POST',
@@ -87,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     },
                     body: JSON.stringify({ correo, contraseña })
                 });
-    
                 const data = await response.json();
                 if (response.ok) {
                     Swal.fire({
@@ -117,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }
         }
-    });
+});
 
     // Validación de campos requeridos
     function checkRequired(inputs) {

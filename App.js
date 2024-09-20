@@ -5,6 +5,10 @@ const mysql = require('mysql2/promise');
 const passport = require('passport');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
+const auth = require('./Middleware/auth');
+const authRoutes = require('./Routes/authRoutes');
+const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
+const userRoutes = require('./Routes/userRoutes')
 const path = require('path');
 const { Salon } = require('./models');
 require('./config/db');
@@ -26,6 +30,8 @@ app.use(fileUpload());
 app.use('/uploads', express.static('public/uploads'));
 app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
+app.set('view cache', false);
+
 
 // Configuración para servir archivos estáticos
 app.use('/Public', express.static(path.join(__dirname, '/Public')));
@@ -48,12 +54,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rutas
-const authRoutes = require('./Routes/authRoutes');
-app.use('/', authRoutes);
-console.log('Rutas de autenticación cargadas');
-
-const adminRoutes = require('./Routes/adminRoutes'); // Asegúrate de que este archivo esté correctamente ubicado
+app.use('/', userRoutes)
 app.use('/admin', adminRoutes);
 
 const salonController = require('./Controllers/salonController');
@@ -62,23 +63,23 @@ const reservationController = require('./Controllers/reservationController')
 
 const userRoutes = require('./Routes/userRoutes');
 app.use('/user', userRoutes);
-
-// Rutas de vistas
-app.get('/', (req, res) => {
-  res.render('User/index'); // Renderizar vista principal de usuario
-});
-
-app.get('/index', (req, res) => {
-  res.render('User/index');
-});
-
-app.get('/sub_halls', (req, res) => {
-  res.render('User/sub_halls');
-});
+app.use( authRoutes )
 
 app.get('/login', (req, res) => {
   res.render('Login');
 });
+
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/dashboard', // Esto debe cambiarse
+  failureRedirect: '/login',
+}), (req, res) => {
+  if (req.user.rol === 'admin') {
+    return res.redirect('/admin/dashboard');
+  } else {
+    return res.redirect('/user/index'); // Cambia esto según tu lógica de usuario
+  }
+});
+
 
 // Ruta para redirigir a Google para la autenticación
 app.get('/auth/google', passport.authenticate('google', {
@@ -91,10 +92,10 @@ app.get('/auth/google/callback',
     // Lógica para redirigir según el rol del usuario
     if (req.user.rol === 'admin') {
       // Si es administrador, redirigir al dashboard
-      res.redirect('/admin/dashboard');
+      return res.redirect('/admin/dashboard');
     } else {
       // Si es un usuario normal, redirigir al index o página principal
-      res.redirect('/index');
+      return res.redirect('/user/index');
     }
 });
 
@@ -135,6 +136,7 @@ app.get('/user/payments/:id', async (req, res) => {
 // app.use((req, res, next) => {
 //   res.status(404).send('Página no encontrada');
 // });
+
 
 // Rutas para administradores
 const auth = require('./Middleware/auth')
@@ -186,10 +188,6 @@ app.post('/user/payments', (req, res) => {
 app.get('/perfil', (req, res) => {
   res.json({ message: 'Perfil del usuario'});
 });
-
-app.get('/halls', salonController.getAllSalons);
-
-app.get('/sub_halls', salonController.getSalonDetailsUser);
 
 
 

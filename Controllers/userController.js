@@ -57,6 +57,7 @@ const registrarUsuario = async (req, res) => {
 };
 
 // Función para iniciar sesión
+// Función para iniciar sesión
 async function loginUsuario(req, res) {
     const { correo, contraseña } = req.body;
 
